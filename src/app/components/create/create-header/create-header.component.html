@@ -1,0 +1,24 @@
+<div class="wrapper">
+    <div class="content flex">
+        <ul class="menu-container">
+            <li><fa-icon [icon]="faAngleLeft"></fa-icon>Home</li>
+            <li>File
+                <div class="submenu">
+                    <div class="header-title">
+                        <h4>Untitled Design</h4>
+                        <div><fa-icon [icon]="faPen"></fa-icon></div>
+                    </div>
+                    <hr>
+                    <div class="menu">Create new design</div>
+                    <div class="menu">Download</div>
+                    <div class="menu">Share</div>
+                    <div class="menu">Save</div>
+                </div>
+            </li>
+        </ul>
+        <div class="btn-container">
+            <div class="btn share" (click)="saveAsImage()">Share</div>
+            <div class="btn download" (click)="downloadDesign()">Download</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="sidebar-container">
+    <div class="content">
+        <div class="home" [ngClass]="{'isActive': currentPage === 'home'}">
+            <a href="" [routerLink]="['/home']">
+                <fa-icon [icon]="faHome"></fa-icon><br>
+                <span>Home</span>
+            </a>
+        </div>
+        <div [ngClass]="{'isActive': currentPage === 'projects'}">
+            <a href="" [routerLink]="['/projects']">
+                <fa-icon [icon]="faFile"></fa-icon><br>
+                <span>Projects</span>
+            </a>
+        </div>
+        <div [ngClass]="{'isActive': currentPage === 'templates'}">
+            <a href="" [routerLink]="['/templates']">
+                <fa-icon [icon]="faFileCode"></fa-icon><br>
+                <span>Templates</span>
+            </a>
+        </div>
+        <div [ngClass]="{'isActive': currentPage === 'reports'}">
+            <a href="" [routerLink]="['/reports']">
+                <fa-icon [icon]="faChartLine"></fa-icon><br>
+                <span>Reports</span>
+            </a>
+        </div>
+    </div>
+</div>

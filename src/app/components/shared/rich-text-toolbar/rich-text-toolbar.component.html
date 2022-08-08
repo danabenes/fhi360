@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="editor-icons">
+    <!-- background color -->
+    <div class="bg-color">
+        <span [style.color]="bgColor"
+            [cpPosition]="'bottom'"
+            [cpPositionOffset]="'50%'"
+            [cpPositionRelativeToArrow]="true"
+            [(colorPicker)]="bgColor"
+            [style.background]="bgColor"
+            (colorPickerChange)="onColorChange('bg', bgColor)"
+            matTooltip="Background Color">
+        </span>
+    </div>
+    <!-- font style -->
+    <div class="font-style">
+        <mat-select (selectionChange)="onFontSelect('fontFace', $event)" [(value)]="selectedOption">
+            <mat-option [value]="'default'" aria-disabled="true">Select Font</mat-option>
+            <mat-option *ngFor="let fontFace of fonts['items']" [value]="fontFace['family']">
+                <span [style.font-family]="fontFace['family']">{{fontFace['family']}}</span>
+            </mat-option>
+        </mat-select>
+    </div>
+    <!-- font size -->
+    <div class="font-size">
+        <p class="minus" (click)="handleFont('deduct')"><fa-icon [icon]="faMinus"></fa-icon></p>
+        <p class="size-value">{{fontSize}}</p>
+        <p class="add" (click)="handleFont('add')"><fa-icon [icon]="faPlus"></fa-icon></p>
+    </div>
+    <!-- text color -->
+    <div class="text-color"
+        [style.color]="textColor"
+        [cpPosition]="'bottom'"
+        [cpPositionOffset]="'50%'"
+        [cpPositionRelativeToArrow]="true"
+        [(colorPicker)]="textColor"
+        [style.background]="textColor"
+        (colorPickerChange)="onColorChange('text', textColor)"
+        matTooltip="Text Color">
+        <fa-icon [icon]="faEyeDropper"></fa-icon>
+    </div>
+    <!-- bold -->
+    <div class="font-bold" (click)="setStyle('fontWeight','bold')" matTooltip="Bold">
+        <fa-icon [icon]="faBold"></fa-icon>
+    </div>
+    <!-- Italic -->
+    <div class="font-italic" (click)="setStyle('fontStyle','italic')" matTooltip="Italic">
+        <fa-icon [icon]="faItalic"></fa-icon>
+    </div>
+    <!-- Send Backward -->
+    <div (click)="setStyle('z-index', 'back')" matTooltip="Send Backward">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+            <g>
+                <path fill="none" d="M0 0H24V24H0z"/>
+                <path d="M14 3c.552 0 1 .448 1 1v5h5c.552 0 1 .448 1 1v10c0 .552-.448 1-1 1H10c-.552 0-1-.448-1-1v-5H4c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h10zm-1 2H5v8h4v-3c0-.552.448-1 1-1h3V5z"/>
+            </g>
+        </svg>
+    </div>
+    <!-- Send to Back -->
+    <div (click)="setStyle('z-index', 'base')" matTooltip="Send to Back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+            <g>
+                <path fill="none" d="M0 0H24V24H0z"/>
+                <path d="M11 3c.552 0 1 .448 1 1v2h5c.552 0 1 .448 1 1v5h2c.552 0 1 .448 1 1v7c0 .552-.448 1-1 1h-7c-.552 0-1-.448-1-1v-2H7c-.552 0-1-.448-1-1v-5H4c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h7zm5 5h-4v3c0 .552-.448 1-1 1H8v4h4v-3c0-.552.448-1 1-1h3V8z"/>
+            </g>
+        </svg>
+    </div>
+    <!-- Bring Forward -->
+    <div (click)="setStyle('z-index', 'forward')" class="wh-30" matTooltip="Bring Forward">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76px" height="76px" viewBox="0 0 76 76" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve">
+            <path fill="#000000" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 19,51L 19,19L 51,19L 51,51L 19,51 Z M 30,52L 33,52L 33,56L 56,56L 56,33L 52,33L 52,30L 59,30L 59,59L 30,59L 30,52 Z "/>
+        </svg>
+    </div>
+    <!-- Bring to Front -->
+    <div (click)="setStyle('z-index', 'front')" class="wh-30" matTooltip="Bring to Front">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76px" height="76px" viewBox="0 0 76 76" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve">
+            <path fill="#000000" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 25,25L 51,25L 51,51L 25,51L 25,25 Z M 17,17L 33,17L 33,24L 30,24L 30,20L 20,20L 20,30L 24,30L 24,33L 17,33L 17,17 Z M 59,43L 59,59L 43,59L 43,52L 46,52L 46,56L 56,56L 56,46L 52,46L 52,43L 59,43 Z "/>
+        </svg>
+    </div>
+  </div>
+  <div class="delete" (click)="deleteElement()"><fa-icon [icon]="faDelete"></fa-icon></div>
+</div>

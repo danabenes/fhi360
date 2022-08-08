@@ -1,0 +1,82 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    border-bottom: 1px solid #dedede;
+    z-index: 2;
+    background-color: white;
+    padding: 0 20px;
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+
+        & > div {
+            display: flex;
+            align-items: center;
+        }
+
+        .left {
+            h4 {
+                font-family: 'Montserrat-Bold';
+                margin: 0 15px;
+            }
+
+            .logo {
+                max-width: 80px;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .right {
+            .search {
+                width: 400px;
+                position: relative;
+
+                input {
+                    padding: 10px 10px 10px 30px;
+                    width: 100%;
+                }
+
+                fa-icon {
+                    position: absolute;
+                    left: 10px;
+                    top: 12px;
+                    color: #707070;
+                }
+            }
+
+            .create {
+                margin: 0 0 0 15px;
+
+                .btn {
+                    background-color: #006168;
+                    color: white;
+                    font-family: 'Montserrat-Bold';
+                    padding: 10px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            }
+
+            .profile {
+                margin: 0 0 0 15px;
+
+                .name {
+                    font-size: 20pt;
+                    color: white;
+                    font-family: 'Montserrat-Bold';
+                    background-color: #006168;
+                    padding: 15px;
+                    border-radius: 100px;
+                }
+            }
+        }
+    }
+}

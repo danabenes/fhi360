@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <div class="content">
+        <img src="assets/images/healthylungs-logo.png">
+        <h1>Create an Account</h1>
+        <div class="login">
+            <p>Have an account? <a href="" [routerLink]="['/login']">Log in</a>.</p>
+        </div>
+        <form [formGroup]="registerForm">
+            <h2>Account Information</h2>
+            <div class="field-container">
+               <input placeholder="Email Address" formControlName="email" />
+            </div>
+            <div class="psw-container flex">
+                <div class="field-container">
+                    <input type="password" placeholder="Password" formControlName="password" />
+                </div>
+                <div class="field-container">
+                    <input type="password" placeholder="Confirm Password" formControlName="confirm_password" />
+                </div>
+            </div>
+
+            <h2 class="personal">Personal Information</h2>
+            <div class="name-container flex">
+                <div class="field-container">
+                    <input placeholder="First Name" formControlName="firstname" />
+                 </div>
+                 <div class="field-container">
+                    <input placeholder="Last Name" formControlName="lastname" />
+                 </div>
+            </div>
+            <div class="cr-container flex">
+                <div class="field-container">
+                    <input placeholder="Contact Number" formControlName="contact" />
+                </div>
+                <div class="field-container">
+                    <select name="region" id="region" formControlName="region">
+                        <option value="">Select Region</option>
+                    </select>
+                </div>
+            </div>
+            <div class="btn-container">
+                <div class="btn submit" (click)="register()">Submit</div>
+                <div class="btn cancel">Cancel</div>
+            </div>
+        </form>
+    </div>
+</div>

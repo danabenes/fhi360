@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+    <div class="section-container">
+        <h2>Projects</h2>
+        <div class="list">
+            <div *ngFor="let project of projectList"><app-tile [data]="project"></app-tile></div>
+        </div>
+    </div>
+</div>

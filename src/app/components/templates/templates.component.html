@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+    <div class="section-container">
+        <h2>Templates</h2>
+        <div class="list">
+            <div *ngFor="let template of templateList" (click)="useTemplate(template)"><app-tile [data]="template"></app-tile></div>
+        </div>
+    </div>
+</div>

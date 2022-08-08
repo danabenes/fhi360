@@ -1,0 +1,87 @@
+<div class="sidebar">
+    <div class="sidebar-content">
+        <div class="type">
+            <ul>
+                <li (click)="showList('template')" [ngClass]="{'isActive': currentTab === 'template'}">
+                    <fa-icon [icon]="faFileCode"></fa-icon><br>
+                    <span>Template</span>
+                </li>
+                <li (click)="showList('upload')" [ngClass]="{'isActive': currentTab === 'upload'}">
+                    <fa-icon [icon]="faCloudUploadAlt"></fa-icon><br>
+                    <span>Upload</span>
+                </li>
+                <li (click)="showList('text')" [ngClass]="{'isActive': currentTab === 'text'}">
+                    <fa-icon [icon]="faFont"></fa-icon><br>
+                    <span>Text</span>
+                </li>
+                <!-- <li (click)="showList('image')" [ngClass]="{'isActive': currentTab === 'image'}">
+                    <fa-icon [icon]="faImages"></fa-icon><br>
+                    <span>Image</span>
+                </li> -->
+                <li (click)="showList('elements')" [ngClass]="{'isActive': currentTab === 'elements'}">
+                    <fa-icon [icon]="faImages"></fa-icon><br>
+                    <span>Elements</span>
+                </li>
+            </ul>
+        </div>
+        <div class="list">
+            <!-- SEARCH -->
+            <div class="search">
+                <input type="text" placeholder="Search">
+                <fa-icon [icon]="faSearch"></fa-icon>
+            </div>
+
+            <div class="element-list">
+
+                <!-- TEXT -->
+                <div *ngIf="currentTab === 'text'">
+                    <div class="element-text" (click)="addElement('textbox', {})">Add text here</div>
+                </div>
+
+                <!-- TEMPLATE -->
+                <div *ngIf="currentTab === 'template'">
+                    <div class="lbl-seeAll">
+                        <p>Recent</p>
+                        <div class="clickable">See all</div>
+                    </div>
+                    <div class="selected-list">
+                        <div class="tile" (click)="addElement('font', null)"></div>
+                        <div class="tile"></div>
+                        <div class="tile"></div>
+                    </div>
+                </div>
+
+                <!-- IMAGE -->
+                <!-- <div class="bg-images" *ngIf="currentTab === 'image'">
+                    <div class="image-list" >
+                        <div *ngFor="let imageElem of currentElementList" (click)="addElement('image', imageElem )">
+                            <img src="{{imageElem.url}}">
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- UPLOAD -->
+                <div class="uploaded-images" *ngIf="currentTab === 'upload'">
+                    <div class="upload-form">
+                        <input type="file" accept="image/*" id="select-image" (change)="selectImage($event)" />
+                        <div class="form-display">
+                            <label class="select-image" for="select-image"
+                                [ngClass]="{hasImage: selectedFileName !== 'Select Image'}"><span>{{selectedFileName}}</span></label>
+                                <button [ngClass]="{isEnabled: enableUploadBtn}" (click)="uploadImage()">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ELEMENTS -->
+                <div class="element-category" *ngIf="currentTab === 'elements'">
+                    <mat-select [(value)]="selectedCategory" (selectionChange)="selectCategory(selectedCategory)">
+                        <mat-option *ngFor="let category of elements | keyvalue" [value]="category.key" class="capitalize">{{category.key}}</mat-option>
+                    </mat-select>
+                    <div class="element-list">
+                        <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: 'assets/images/elements/'+folderName+'/'+image+'.png'})"><img src="assets/images/elements/{{folderName}}/{{image}}.png"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

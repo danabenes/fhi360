@@ -1,0 +1,38 @@
+.container {
+    max-width: 180px;
+    cursor: pointer;
+    margin-bottom: 3em;
+
+    .content {
+        .image-container {
+            background-color: #f8f8f8;
+            display: flex;
+            align-self: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 10px;
+
+            .image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        .content-details {
+            margin-top: 10px;
+
+            p {
+                margin: 0;
+                font-size: 9pt;
+            }
+
+            .title {
+                font-family: 'Montserrat-SemiBold';
+            }
+
+            .category {
+                font-size: 8pt;
+            }
+        }
+    }
+}

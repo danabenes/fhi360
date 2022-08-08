@@ -1,0 +1,94 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    border-bottom: 1px solid #669383;
+    z-index: 2;
+    background-color: #669383;
+    padding: 0 20px;
+
+    .content {
+        justify-content: space-between;
+        height: 100%;
+        color: white;
+
+        .menu-container {
+            list-style: none;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin: 0 10px;
+                font-size: 13pt;
+                font-family: 'Montserrat-SemiBold';
+                cursor: pointer;
+                position: relative;
+
+                fa-icon {
+                    margin-right: 8px;
+                }
+
+                .submenu {
+                    position: absolute;
+                    z-index: 2;
+                    background-color: white;
+                    border-radius: 5px;
+                    padding: 10px;
+                    width: 230px;
+                    top: 25px;
+                    color: #8b9393;
+                    font-size: 9pt;
+                    display: none;
+
+                    .header-title {
+                        display: flex;
+                        justify-content: space-between;
+                        color: #36878d;
+                        
+                        h4 {
+                            font-family: 'Montserrat-Bold';
+                            margin: 0;
+                        }
+                    }
+
+                    .menu {
+                        padding-bottom: 5px;
+                    }
+                }
+
+                &:hover > .submenu {
+                    display: block;
+                }
+            }
+        }
+
+        .btn-container {
+            justify-content: end;
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            .btn {
+                padding: 10px 20px;
+                text-align: center;
+                font-family: 'Montserrat-Bold';
+                border-radius: 5px;
+                margin: 0 10px;
+                cursor: pointer;
+            }
+
+            .share {
+                background-color: #fa9e3d;
+            }
+
+            .download {
+                background-color: #006168;
+            }
+        }
+    }
+}

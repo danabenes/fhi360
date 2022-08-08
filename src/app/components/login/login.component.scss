@@ -1,0 +1,97 @@
+.wrapper {
+    background-color: #dbe7ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .content {
+        width: 400px;
+        text-align: center;
+
+        img {
+            max-width: 200px;
+        }
+
+        h1 {
+            font-family: 'Montserrat-Black';
+            color: #006168;
+            font-size: 25pt;
+            line-height: 1.4;
+            margin: 20px 0;
+        }
+
+        form {
+            color: #8e9293;
+
+            a {
+                text-decoration: none;
+                color: #2673f3;
+            }
+
+            .field-container {
+                margin: 10px 0;
+                
+                input {
+                    padding: 15px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 1px solid #e0e0e0;
+                }
+            }
+
+            .rf-container {
+                display: flex;
+                justify-content: space-between;
+                font-size: 9pt;
+
+                .remember {
+                    display: flex;
+                    align-items: center;
+
+                    label {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .btn-container {
+                margin: 10px 0;
+
+                .btn {
+                    width: 100%;
+                    padding: 10px;
+                    border: 1px solid transparent;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    background-color: #35a592;
+                    color: white;
+                    font-family: 'Montserrat-Bold';
+                    font-size: 12pt;
+                }
+            }
+
+            .create-account {
+                text-align: left;
+                font-size: 9pt;
+
+                a {
+                    font-family: 'Montserrat-Bold';
+                    text-decoration: none;
+                    color: #2673f3;
+                }
+            }
+
+            p {
+                text-align: left;
+                margin: 0;
+                font-size: 9pt;
+
+                a {
+                    color: #8e9293;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

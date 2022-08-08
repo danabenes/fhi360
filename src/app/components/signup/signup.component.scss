@@ -1,0 +1,103 @@
+.wrapper {
+    background-color: #dbe7ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .content {
+        width: 600px;
+        text-align: center;
+        color: #6f7070;
+
+        a {
+            text-decoration: none;
+            color: #2673f3;
+            font-family: 'Montserrat-Bold';
+        }
+
+        img {
+            max-width: 200px;
+        }
+
+        h1 {
+            font-family: 'Montserrat-Black';
+            color: #006168;
+            font-size: 20pt;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: left;
+            color: #006168;
+            font-size: 16pt;
+            font-family: 'Montserrat-Bold';
+            margin-bottom: 10px;
+        }
+
+        form {
+            color: #8e9293;
+            margin-top: 2em;
+
+            .field-container {
+                margin: 10px 0;
+                
+                input {
+                    padding: 15px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    border: 1px solid #e0e0e0;
+                }
+            }
+
+            .psw-container, .name-container, .cr-container {
+                justify-content: space-between;
+
+                & > div {
+                    width: 48%;
+                }
+            }
+
+            .personal {
+                margin-top: 1em;
+            }
+
+            .cr-container {
+                select {
+                    width: 100%;
+                    padding: 14px 10px;
+                    border: 0;
+                    color: #6f7070;
+                }
+            }
+
+            .btn-container {
+                margin: 2em 0;
+                text-align: left;
+                display: flex;
+
+                .btn {
+                    width: 180px;
+                    margin-right: 10px;
+                    text-align: center;
+                    padding: 15px;
+                    font-size: 12pt;
+                    font-family: 'Montserrat-Bold';
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+
+                .submit {
+                    background-color: #006168;
+                    color: white;
+                }
+
+                .cancel {
+                    background-color: #ffd1d1;
+                    color: black;
+                }
+            }
+        }
+    }
+}

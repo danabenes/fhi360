@@ -1,0 +1,19 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+    <div class="section-container">
+        <h2>Reports</h2>
+        <div class="tabs">
+            <div (click)="getContent('overview')" [ngClass]="{'isActive': currentContent === 'overview'}">Overview</div>
+            <div (click)="getContent('datatable')" [ngClass]="{'isActive': currentContent === 'datatable'}">Datatable</div>
+        </div>
+        <div class="content">
+            <div *ngIf="currentContent === 'overview'">
+                <app-reports-overview></app-reports-overview>
+            </div>
+            <div *ngIf="currentContent === 'datatable'">
+                <app-reports-datatable></app-reports-datatable>
+            </div>
+        </div>
+    </div>
+</div>
