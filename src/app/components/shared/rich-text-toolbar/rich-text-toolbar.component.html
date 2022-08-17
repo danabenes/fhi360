@@ -8,8 +8,7 @@
             [cpPositionRelativeToArrow]="true"
             [(colorPicker)]="bgColor"
             [style.background]="bgColor"
-            (colorPickerChange)="onColorChange('bg', bgColor)"
-            matTooltip="Background Color">
+            (colorPickerChange)="onColorChange('bg', bgColor)">
         </span>
     </div>
     <!-- font style -->
@@ -35,8 +34,7 @@
         [cpPositionRelativeToArrow]="true"
         [(colorPicker)]="textColor"
         [style.background]="textColor"
-        (colorPickerChange)="onColorChange('text', textColor)"
-        matTooltip="Text Color">
+        (colorPickerChange)="onColorChange('text', textColor)">
         <fa-icon [icon]="faEyeDropper"></fa-icon>
     </div>
     <!-- bold -->
