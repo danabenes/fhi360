@@ -63,7 +63,9 @@ export class TemplatesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  useTemplate(details: any) {
+  useTemplate(details: any, type: string) {
+    details.type = type;
+    
     this.dialog.open(ModalComponent, {
       width: '700px',
       data: {

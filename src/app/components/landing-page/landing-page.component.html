@@ -4,7 +4,7 @@
     <div class="section-container">
         <h2>Recent Designs</h2>
         <div class="list">
-            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template)"><app-tile [data]="template"></app-tile></div>
+            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent')"><app-tile [data]="template"></app-tile></div>
         </div>
     </div>
     <div class="section-container">

@@ -83,9 +83,56 @@
             font-family: 'Montserrat-SemiBold';
         }
     }
+
+    .prompt {
+        padding: 0;
+        
+        .modal-content {
+            padding: 0;
+
+            fa-icon {
+                background: green;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                color: white;
+                font-size: 20px;
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+
+            .modal-content-details {
+                padding: 10px 20px 25px 20px;
+
+                .message {
+                    margin: 20px;
+                    text-align: center;
+                    font-size: 16px;
+                }
+    
+                .prompt-btn {
+                    background-color: #fa9e3d;
+                    width: 100%;
+                    padding: 15px;
+                    border-radius: 10px;
+                    text-align: center;
+                    color: white;
+                    font-size: 18px;
+                    font-family: "Montserrat-Bold";
+                    cursor: pointer;
+                    margin-top: 35px;
+                }
+            }
+        }
+    }
 }
 
 ::ng-deep .mat-dialog-container {
     box-shadow: none;
     background-color: transparent;
+    border: 0;
+    overflow: inherit;
+    outline: none;
 }

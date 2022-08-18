@@ -80,7 +80,8 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleRecentDesign(details: any) {
+  handleRecentDesign(details: any, type: string) {
+    details.type = type;
     this.dialog.open(ModalComponent, {
       width: '700px',
       data: {

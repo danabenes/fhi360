@@ -1,5 +1,5 @@
 <div class="modal modal-wrapper">
-    <div class="modal-container">
+    <div class="modal-container" *ngIf="data.details.type === 'withContent'">
         <div class="modal-content">
             <div class="flex">
                 <div class="overview">
@@ -16,6 +16,15 @@
         </div>
         <div class="close-btn" [mat-dialog-close]>
             <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+    </div>
+    <div class="modal-container prompt" *ngIf="data.details.type === 'prompt'">
+        <div class="modal-content">
+            <fa-icon [icon]="faCheck"></fa-icon>
+            <div class="modal-content-details">
+                <div class="message">{{data.details.message}}</div>
+                <div class="btn prompt-btn" [mat-dialog-close]>OK</div>
+            </div>
         </div>
     </div>
 </div>

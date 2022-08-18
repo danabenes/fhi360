@@ -70,7 +70,7 @@ export class CreateSidebarComponent implements OnInit {
 
   getImages() {
     let results;
-    this.apiService.getApi('app/images').subscribe(res => {
+    this.apiService.getApi('me/images').subscribe(res => {
       this.currentElementList = res; 
     });
   }

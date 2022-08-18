@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import domtoimage from 'dom-to-image';
 import { ApiService } from 'src/app/services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-create',
@@ -13,10 +15,14 @@ export class CreateComponent implements OnInit {
   @ViewChild('canvas')canvas!: ElementRef;
   @ViewChild('screen')screen!: ElementRef;
   @ViewChild('richText')richText!: ElementRef;
+  @ViewChild('elementCode')elementCode!: ElementRef;
 
   faDrag = faLocationArrow;
   arrayOfElements: Array<any> = [];
   selectedElement: any;
+
+  // array of template elements
+  templateElements: Array<any> = [];
 
   bgSelected : boolean = false;
   currentIndex:any = null;
@@ -28,7 +34,8 @@ export class CreateComponent implements OnInit {
   isTemplate: boolean = false;
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    public dialog: MatDialog
   ) { 
   }
 
@@ -66,7 +73,6 @@ export class CreateComponent implements OnInit {
   }
 
   setElementStyle(styles: any) {
-    console.log(styles);
     if(this.arrayOfElements[this.currentIndex].hasOwnProperty(styles.key) && this.arrayOfElements[this.currentIndex][styles.key] === styles.value && styles.key !== 'z-index') {
       delete this.arrayOfElements[this.currentIndex][styles.key];
     } else {
@@ -95,6 +101,9 @@ export class CreateComponent implements OnInit {
           this.arrayOfElements[this.currentIndex][styles.key] = 0;
       }
     }
+
+    console.log(this.arrayOfElements[this.currentIndex]);
+
   }
 
   deleteItem() {
@@ -118,11 +127,22 @@ export class CreateComponent implements OnInit {
     const elementHtml = element.outerHTML;
     let designData = {
       title: "Template 1",
-      content: elementHtml
+      content: this.arrayOfElements
     }
+
     this.apiService.postApi('me/projects', designData).subscribe(res => {
-      alert('submitted');
+      const details = {
+        type: 'prompt',
+        message: 'Design is submitted for review.'
+      }
+  
+      this.dialog.open(ModalComponent, {
+        width: '500px',
+        data: {
+          details: details,
+          actions: []
+        }
+      });
     })
   }
-
 }
