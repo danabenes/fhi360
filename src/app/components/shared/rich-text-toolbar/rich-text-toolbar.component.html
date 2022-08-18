@@ -46,7 +46,7 @@
         <fa-icon [icon]="faItalic"></fa-icon>
     </div>
     <!-- Send Backward -->
-    <div (click)="setStyle('z-index', 'back')" matTooltip="Send Backward">
+    <div (click)="setStyle('z-index', 'back')" matTooltip="Send Backward" >
         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
             <g>
                 <path fill="none" d="M0 0H24V24H0z"/>
@@ -75,6 +75,10 @@
             <path fill="#000000" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 25,25L 51,25L 51,51L 25,51L 25,25 Z M 17,17L 33,17L 33,24L 30,24L 30,20L 20,20L 20,30L 24,30L 24,33L 17,33L 17,17 Z M 59,43L 59,59L 43,59L 43,52L 46,52L 46,56L 56,56L 56,46L 52,46L 52,43L 59,43 Z "/>
         </svg>
     </div>
+
+    <!-- delete -->
+    <div class="delete" (click)="deleteElement()" matTooltip="Delete"><fa-icon [icon]="faDelete" style=" font-size: 1.15rem; border-left: #888 solid 1px; margin-left: 5px; padding-left: 10px;"></fa-icon></div>
+    
   </div>
-  <div class="delete" (click)="deleteElement()"><fa-icon [icon]="faDelete"></fa-icon></div>
+  
 </div>
