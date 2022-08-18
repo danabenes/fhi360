@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -74,7 +75,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HttpClientModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

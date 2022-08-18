@@ -13,7 +13,11 @@
                 <div class="btn" (click)="createDesign()">Create a Design</div>
             </div>
             <div class="profile">
-                <div class="name">D</div>
+                <button mat-button [matMenuTriggerFor]="profileSettings" class="name">D</button>
+                <mat-menu #profileSettings="matMenu">
+                    <button mat-menu-item>Update Profile</button>
+                    <button mat-menu-item>Logout</button>
+                </mat-menu>
             </div>
         </div>
     </div>

@@ -45,9 +45,7 @@
                         <div class="clickable">See all</div>
                     </div>
                     <div class="selected-list">
-                        <div class="tile" (click)="addElement('font', null)"></div>
-                        <div class="tile"></div>
-                        <div class="tile"></div>
+                        <div class="tile" *ngFor="let template of currentElementList" (click)="addElement('template', {type: 'template', content: template.content})"></div>
                     </div>
                 </div>
 
@@ -70,6 +68,9 @@
                                 <button [ngClass]="{isEnabled: enableUploadBtn}" (click)="uploadImage()">Upload</button>
                         </div>
                     </div>
+                    <div class="uploaded-images">
+                        <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: image.url})"><img src={{image.url}}></div>
+                    </div>
                 </div>
                 
                 <!-- ELEMENTS -->
@@ -78,7 +79,7 @@
                         <mat-option *ngFor="let category of elements | keyvalue" [value]="category.key" class="capitalize">{{category.key}}</mat-option>
                     </mat-select>
                     <div class="element-list">
-                        <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: 'assets/images/elements/'+folderName+'/'+image+'.png'})"><img src="assets/images/elements/{{folderName}}/{{image}}.png"></div>
+                        <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: image.url})"><img src={{image.url}}></div>
                     </div>
                 </div>
             </div>

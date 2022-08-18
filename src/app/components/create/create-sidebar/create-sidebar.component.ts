@@ -21,6 +21,8 @@ export class CreateSidebarComponent implements OnInit {
   currentElementList: any = [];
 
   selectedFileName: string = 'Select Image';
+  selectedImage: any;
+
   enableUploadBtn: boolean = false;
   selectedCategory: string = "background";
   folderName: string = "background";
@@ -41,8 +43,12 @@ export class CreateSidebarComponent implements OnInit {
   showList(selected: string) {
     this.currentTab = selected;
     if(selected === 'elements') {
-      this.currentElementList = this.elements['background'];
-    } 
+      this.getImages();
+    } else if (selected === 'template') {
+      this.getTemplateList();
+    } else if (selected === 'upload') {
+      this.getUploadedImageList();
+    }
   }
 
   selectCategory(key:string) {
@@ -50,13 +56,23 @@ export class CreateSidebarComponent implements OnInit {
     this.folderName = key.replace(/\s/g, "");
   }
 
-  getImages() {
-    let results;
-    this.apiService.getApi('images').subscribe(res => {
+  getTemplateList() {
+    this.apiService.getApi('me/projects').subscribe(res => {
       this.currentElementList = res; 
     });
+  }
 
-    return results;
+  getUploadedImageList() {
+    this.apiService.getApi('me/images').subscribe(res => {
+      this.currentElementList = res; 
+    });
+  }
+
+  getImages() {
+    let results;
+    this.apiService.getApi('app/images').subscribe(res => {
+      this.currentElementList = res; 
+    });
   }
 
   addElement(type: string, data: any) {
@@ -65,12 +81,20 @@ export class CreateSidebarComponent implements OnInit {
   }
 
   selectImage(imageDetails: any) {
+    this.selectedImage = imageDetails.target.files[0];
     this.selectedFileName = imageDetails.target.files[0].name;
     this.enableUploadBtn = true;
   }
 
   uploadImage() {
-    console.log('upload image');
+    const fd = new FormData();
+    fd.append('file_upload', this.selectedImage, this.selectedFileName);
+    fd.append('title', this.selectedFileName);
+    console.log(fd);
+    this.apiService.postApi('me/images', fd).subscribe(res=> {
+      console.log(res);
+      alert('uploaded!')
+    });
   }
 
 }

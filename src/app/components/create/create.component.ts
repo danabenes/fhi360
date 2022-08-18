@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -24,6 +24,8 @@ export class CreateComponent implements OnInit {
   elementFillColor: string = 'black';
   defaultFontSize : number = 12;
   defaultPosition: number = 0;
+  appendHtml: any;
+  isTemplate: boolean = false;
 
   constructor(
     private apiService: ApiService
@@ -49,9 +51,14 @@ export class CreateComponent implements OnInit {
   }
 
   addElement(data: any) {
-    let indexOfLatestElem = this.arrayOfElements.push(data) - 1;
-    this.currentIndex = indexOfLatestElem;
-    this.defaultFontSize = data.fontSize ? data.fontSize.substring(0,2) : 12;
+    if(data.type === 'template') {
+      this.isTemplate = true;
+      this.appendHtml = data.content;
+    } else {
+      let indexOfLatestElem = this.arrayOfElements.push(data) - 1;
+      this.currentIndex = indexOfLatestElem;
+      this.defaultFontSize = data.fontSize ? data.fontSize.substring(0,2) : 12;
+    }
   }
 
   selectElement(index: number) {
@@ -97,17 +104,24 @@ export class CreateComponent implements OnInit {
   }
 
   shareTemplate() {
-    html2canvas(this.canvas.nativeElement).then(function(canvas) {
-      const a = document.createElement("a");
-      a.href = canvas.toDataURL("image/jpeg");
-      a.download = "image.jpeg";
-      a.click();
+    domtoimage.toPng(this.canvas.nativeElement, {quality: 0.99})
+    .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = 'template.png';
+        link.href = dataUrl;
+        link.click();
     });
   }
 
   downloadDesign() {
-    this.apiService.postApi('designs', this.canvas.nativeElement.toString()).subscribe(res => {
-      console.log(res);
+    const element = this.canvas.nativeElement;
+    const elementHtml = element.outerHTML;
+    let designData = {
+      title: "Template 1",
+      content: elementHtml
+    }
+    this.apiService.postApi('me/projects', designData).subscribe(res => {
+      alert('submitted');
     })
   }
 

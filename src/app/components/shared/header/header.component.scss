@@ -67,14 +67,17 @@ header {
 
             .profile {
                 margin: 0 0 0 15px;
+                cursor: pointer;
 
                 .name {
                     font-size: 20pt;
                     color: white;
-                    font-family: 'Montserrat-Bold';
+                    font-family: "Montserrat-Bold";
                     background-color: #006168;
-                    padding: 15px;
+                    padding: 10px 15px;
                     border-radius: 100px;
+                    border: 0;
+                    cursor: pointer;
                 }
             }
         }
