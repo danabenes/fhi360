@@ -3,6 +3,7 @@
         <img src="assets/images/healthylungs-logo.png">
         <h1>Create your own <br> IEC Material</h1>
         <form [formGroup]="loginForm">
+            <div class="errorMessage"><p>{{errorMessage}}</p></div>
             <div class="field-container">
                <input placeholder="Enter your Email Address" formControlName="email" />
             </div>
@@ -18,7 +19,7 @@
                 </div>
             </div>
             <div class="btn-container">
-                <div class="btn" (click)="login()">Log in</div>
+                <div class="btn" [ngClass]="{'disable': !loginForm.valid}" (click)="login()">Log in</div>
             </div>
             <div class="create-account">
                 <p>No account yet? <a href="" [routerLink]="['/signup']">Create your own account in seconds</a>.</p>

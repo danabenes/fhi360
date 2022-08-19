@@ -18,7 +18,7 @@
             color: #006168;
             font-size: 25pt;
             line-height: 1.4;
-            margin: 20px 0;
+            margin: 20px 0 0 0;
         }
 
         form {
@@ -69,6 +69,11 @@
                     font-family: 'Montserrat-Bold';
                     font-size: 12pt;
                 }
+
+                .disable {
+                    background-color: #8e9293;
+                    pointer-events: none;
+                }
             }
 
             .create-account {
@@ -92,6 +97,12 @@
                     text-decoration: underline;
                 }
             }
+        }
+
+        .errorMessage {
+            margin: 0;
+            height: 20px;
+            color: red;
         }
     }
 }
