@@ -25,7 +25,6 @@ export class CreateSidebarComponent implements OnInit {
 
   enableUploadBtn: boolean = false;
   selectedCategory: string = "background";
-  folderName: string = "background";
 
   @Output() element: EventEmitter<any> = new EventEmitter();
   elements: any;
@@ -53,7 +52,9 @@ export class CreateSidebarComponent implements OnInit {
 
   selectCategory(key:string) {
     this.currentElementList = this.elements[key];
-    this.folderName = key.replace(/\s/g, "");
+    this.selectedCategory = key;
+    console.log(this.selectedCategory);
+    this.getImages();
   }
 
   getTemplateList() {
@@ -70,7 +71,7 @@ export class CreateSidebarComponent implements OnInit {
 
   getImages() {
     let results;
-    this.apiService.getApi('me/images').subscribe(res => {
+    this.apiService.getApi('me/images?category='+this.selectedCategory).subscribe(res => {
       this.currentElementList = res; 
     });
   }

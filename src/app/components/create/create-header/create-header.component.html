@@ -2,7 +2,8 @@
     <div class="content flex">
         <ul class="menu-container">
             <li class="home-link"><fa-icon [icon]="faAngleLeft"></fa-icon><a href="" [routerLink]="['/home']">Home</a></li>
-            <li>File
+            <li>
+                <!-- File
                 <div class="submenu">
                     <div class="header-title">
                         <h4>Untitled Design</h4>
@@ -13,7 +14,27 @@
                     <div class="menu">Download</div>
                     <div class="menu">Share</div>
                     <div class="menu">Save</div>
-                </div>
+                </div> -->
+                <button mat-button [matMenuTriggerFor]="fileSettings" class="file">File</button>
+                <mat-menu #fileSettings="matMenu">
+                    <div mat-menu-item (click)="$event.stopPropagation();"class="header-title">
+                        <div class="file-title">
+                            <div>
+                                <p *ngIf="!setFileName">{{templateFileName}}</p>
+                                <form [formGroup]="templateForm">
+                                    <input type="text" *ngIf="setFileName" formControlName="templateName"  #fileNameInput)>
+                                </form>
+                            </div>
+                            <div (click)="setTemplateFileName($event)"><fa-icon [icon]="faPen"></fa-icon></div>
+                        </div>
+                        <!-- <h4>Untitled Design</h4>
+                        <div></div> -->
+                    </div>
+                    <div mat-menu-item>Create New Design</div>
+                    <div mat-menu-item>Download</div>
+                    <div mat-menu-item>Share</div>
+                    <div mat-menu-item>Save</div>
+                </mat-menu>
             </li>
         </ul>
         <div class="btn-container">

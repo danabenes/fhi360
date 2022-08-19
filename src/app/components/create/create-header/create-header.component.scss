@@ -31,8 +31,29 @@
                 text-decoration: none;
                 color: white;
 
+                .file {
+                    appearance: none;
+                    border: 0;
+                    background-color: transparent;
+                    color: white;
+                    font-size: 13pt;
+                    font-family: 'Montserrat-SemiBold';
+                    cursor: pointer;
+                }
+
                 fa-icon {
                     margin-right: 8px;
+                }
+
+                .header-title {
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    
+                    h4 {
+                        font-family: 'Montserrat-Bold';
+                        margin: 0;
+                    }
                 }
 
                 .submenu {
@@ -41,22 +62,11 @@
                     background-color: white;
                     border-radius: 5px;
                     padding: 10px;
-                    width: 230px;
+                    
                     top: 25px;
                     color: #8b9393;
                     font-size: 9pt;
                     display: none;
-
-                    .header-title {
-                        display: flex;
-                        justify-content: space-between;
-                        color: #36878d;
-                        
-                        h4 {
-                            font-family: 'Montserrat-Bold';
-                            margin: 0;
-                        }
-                    }
 
                     .menu {
                         padding-bottom: 5px;
@@ -97,6 +107,24 @@
             .download {
                 background-color: #006168;
             }
+        }
+    }
+}
+
+::ng-deep .mat-menu-item {
+    width: 230px !important;
+    line-height: 2em !important;
+    height: auto !important;
+
+    .file-title {
+        display: flex;
+        justify-content: space-between;
+        color: #36878d;
+        border-bottom: 2px solid #669383;
+        font-family: 'Montserrat-Bold';
+
+        p {
+            margin: 0;
         }
     }
 }

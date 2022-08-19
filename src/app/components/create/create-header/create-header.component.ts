@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { faAngleLeft, faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,11 +11,21 @@ export class CreateHeaderComponent implements OnInit {
 
   faAngleLeft = faAngleLeft;
   faPen = faPen;
+  setFileName: boolean = false;
+
+  templateForm: any ;
+  templateFileName:string = "Untitled Design";
 
   @Output() share: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    public formBuilder: FormBuilder
+  ) {
+    this.templateForm = this.formBuilder.group({
+      templateName: ''
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -25,6 +36,17 @@ export class CreateHeaderComponent implements OnInit {
 
   downloadDesign() {
     this.download.emit();
+  }
+
+  setTemplateFileName(e:any) {
+    e.stopPropagation();
+    this.setFileName = !this.setFileName;
+    if(!this.setFileName) {
+      this.templateFileName = this.templateForm.value.templateName ?  this.templateForm.value.templateName  : "Untitled Design" ;
+    }
+    // setTimeout(() => {
+    //   this.fileNameInput.nativeElement.focus();
+    // }, 300);
   }
 
 }
