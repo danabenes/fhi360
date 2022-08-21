@@ -3,6 +3,8 @@ import { faFileCode, faCloudUploadAlt, faFont, faSearch, faImages } from '@forta
 import { ApiService } from 'src/app/services/api.service';
 
 import elementsData from 'src/app/data/elements.json';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -31,7 +33,8 @@ export class CreateSidebarComponent implements OnInit {
 
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +56,6 @@ export class CreateSidebarComponent implements OnInit {
   selectCategory(key:string) {
     this.currentElementList = this.elements[key];
     this.selectedCategory = key;
-    console.log(this.selectedCategory);
     this.getImages();
   }
 
@@ -91,10 +93,19 @@ export class CreateSidebarComponent implements OnInit {
     const fd = new FormData();
     fd.append('file_upload', this.selectedImage, this.selectedFileName);
     fd.append('title', this.selectedFileName);
-    console.log(fd);
     this.apiService.postApi('me/images', fd).subscribe(res=> {
-      console.log(res);
-      alert('uploaded!')
+      const details = {
+        type: 'prompt',
+        message: 'Image Uploaded!'
+      }
+  
+      this.dialog.open(ModalComponent, {
+        width: '500px',
+        data: {
+          details: details,
+          actions: []
+        }
+      });
     });
   }
 

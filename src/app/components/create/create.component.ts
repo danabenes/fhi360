@@ -90,7 +90,6 @@ export class CreateComponent implements OnInit {
 
   getTextValue(e: any) {
     this.arrayOfElements[this.currentIndex].textValue = e.target.value;
-    console.log(this.arrayOfElements[this.currentIndex]);
   }
 
   setElementStyle(styles: any) {
@@ -122,9 +121,6 @@ export class CreateComponent implements OnInit {
           this.arrayOfElements[this.currentIndex][styles.key] = 0;
       }
     }
-
-    console.log(this.arrayOfElements[this.currentIndex]);
-
   }
 
   deleteItem() {
@@ -144,33 +140,37 @@ export class CreateComponent implements OnInit {
   }
 
   downloadDesign() {
-    let thumbnailImg;
+    let thumbnailImg:any;
+
+    let designData = {
+      title: "Template 1",
+      content: this.arrayOfElements,
+      thumbnail: ''
+    }
 
     domtoimage.toPng(this.canvas.nativeElement)
     .then(function (dataUrl) {
         thumbnailImg = new Image();
         thumbnailImg.src = dataUrl;
-    })
-
-    let designData = {
-      title: "Template 1",
-      content: this.arrayOfElements,
-      thumbnail: thumbnailImg
-    }
-    console.log(designData);
-    this.apiService.postApi('me/projects', designData).subscribe(res => {
-      const details = {
-        type: 'prompt',
-        message: 'Design is submitted for review.'
-      }
-  
-      this.dialog.open(ModalComponent, {
-        width: '500px',
-        data: {
-          details: details,
-          actions: []
+        designData.thumbnail = thumbnailImg;
+    });
+    
+    setTimeout(() => {
+      console.log(designData);
+      this.apiService.postApi('me/projects', designData).subscribe(res => {
+        const details = {
+          type: 'prompt',
+          message: 'Design is submitted for review.'
         }
-      });
-    })
+    
+        this.dialog.open(ModalComponent, {
+          width: '500px',
+          data: {
+            details: details,
+            actions: []
+          }
+        });
+      })
+    }, 5000);
   }
 }
