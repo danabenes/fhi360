@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import domtoimage from 'dom-to-image';
 import { ApiService } from 'src/app/services/api.service';
@@ -15,7 +15,6 @@ export class CreateComponent implements OnInit {
   @ViewChild('canvas')canvas!: ElementRef;
   @ViewChild('screen')screen!: ElementRef;
   @ViewChild('richText')richText!: ElementRef;
-  @ViewChild('elementCode')elementCode!: ElementRef;
 
   faDrag = faLocationArrow;
   arrayOfElements: Array<any> = [];
@@ -59,8 +58,8 @@ export class CreateComponent implements OnInit {
 
   addElement(data: any) {
     if(data.type === 'template') {
-      this.isTemplate = true;
-      this.appendHtml = data.content;
+      this.arrayOfElements = [];
+      this.createTemplate(data.content);
     } else {
       let indexOfLatestElem = this.arrayOfElements.push(data) - 1;
       this.currentIndex = indexOfLatestElem;
@@ -68,8 +67,30 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  createTemplate(elements: any) {
+    for (let index = 0; index < elements.length; index++) {
+      this.arrayOfElements.push(elements[index]);
+    }
+  }
+
   selectElement(index: number) {
     this.currentIndex = index;
+
+    // set size
+    const element = document.getElementById('elementImageWrapper'+index);
+    this.arrayOfElements[index].width = element?.style.width;
+    this.arrayOfElements[index].height = element?.style.height;
+  }
+  
+
+  setPosition(i: number) {
+    const element = document.getElementById('elementWrapper'+i);
+    this.arrayOfElements[i].position = element?.style.transform;
+  }
+
+  getTextValue(e: any) {
+    this.arrayOfElements[this.currentIndex].textValue = e.target.value;
+    console.log(this.arrayOfElements[this.currentIndex]);
   }
 
   setElementStyle(styles: any) {
@@ -123,13 +144,20 @@ export class CreateComponent implements OnInit {
   }
 
   downloadDesign() {
-    const element = this.canvas.nativeElement;
-    const elementHtml = element.outerHTML;
+    let thumbnailImg;
+
+    domtoimage.toPng(this.canvas.nativeElement)
+    .then(function (dataUrl) {
+        thumbnailImg = new Image();
+        thumbnailImg.src = dataUrl;
+    })
+
     let designData = {
       title: "Template 1",
-      content: this.arrayOfElements
+      content: this.arrayOfElements,
+      thumbnail: thumbnailImg
     }
-
+    console.log(designData);
     this.apiService.postApi('me/projects', designData).subscribe(res => {
       const details = {
         type: 'prompt',

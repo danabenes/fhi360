@@ -17,7 +17,7 @@ export class CreateSidebarComponent implements OnInit {
   faFont = faFont;
   faSearch = faSearch;
   faImages = faImages;
-  currentTab : string = 'elements';
+  currentTab : string = 'template';
   currentElementList: any = [];
 
   selectedFileName: string = 'Select Image';

@@ -11,7 +11,11 @@
             (click)="selectBgArea($event)">
             <div *ngIf="isTemplate" [innerHtml]="appendHtml"></div>
             <div *ngIf="!isTemplate">
-                <div class="drag-wrapper" *ngFor="let element of arrayOfElements | slice:1 ; index as indexOfelement;" [style.z-index]="element['z-index']" cdkDrag>
+                <div class="drag-wrapper" *ngFor="let element of arrayOfElements | slice:1 ; index as indexOfelement;" 
+                [style.z-index]="element['z-index']" 
+                [style.transform]="element.position"
+                cdkDrag 
+                id="elementWrapper{{indexOfelement + 1}}">
                     <div class="wrapper">
                         <div class="element-container"
                             (click)="selectElement(indexOfelement + 1)"
@@ -29,18 +33,22 @@
                                 cdkTextareaAutosize
                                 autofocus
                                 #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="1">Add text here</textarea>
+                                cdkAutosizeMinRows="1"
+                                (input)="getTextValue($event)">{{element.textValue ? element.textValue : 'Add text here'}}</textarea>
                             <!-- END TEXTAREA -->
     
                             <!-- START IMAGE -->
                             <div class="image-wrapper" *ngIf="element.type === 'image' || element.type === 'element'"
-                                [ngClass]="{isActive: currentIndex === indexOfelement + 1}">
+                                [ngClass]="{isActive: currentIndex === indexOfelement + 1}"
+                                [style.width]="element.width"
+                                [style.height]="element.height"
+                                id="elementImageWrapper{{indexOfelement+1}}">
                                 <img src="{{element.url}}">
                             </div>
                             <!-- END IMAGE -->
                         </div>
 
-                        <div *ngIf="currentIndex === indexOfelement + 1" cdkDragHandle>
+                        <div *ngIf="currentIndex === indexOfelement + 1" cdkDragHandle (click)="setPosition(indexOfelement + 1)">
                             <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
                                 <path d="M0 0h24v24H0z" fill="none"></path>
