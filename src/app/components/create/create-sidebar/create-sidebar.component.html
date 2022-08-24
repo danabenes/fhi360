@@ -45,7 +45,9 @@
                         <div class="clickable">See all</div>
                     </div>
                     <div class="selected-list">
-                        <div class="tile" *ngFor="let template of currentElementList" (click)="addElement('template', {type: 'template', content: template.content})"></div>
+                        <div class="tile" *ngFor="let template of currentElementList" (click)="addElement('template', template)">
+                            <img src={{template.thumbnail}} />
+                        </div>
                     </div>
                 </div>
 

@@ -3,8 +3,35 @@
 <div class="content-wrapper">
     <div class="section-container">
         <h2>Projects</h2>
-        <div class="list">
-            <div *ngFor="let project of projectList"><app-tile [data]="project"></app-tile></div>
+        
+        <div class="for-approval-section">
+            <div class="section">
+                <h3>Projects for Approval</h3>
+                <div><a href="">See All</a></div>
+            </div>
+            <div class="list">
+                <div *ngFor="let project of forApprovalList"><app-tile [data]="project"></app-tile></div>
+            </div>
+        </div>
+
+        <div class="for-approval-section">
+            <div class="section">
+                <h3>Approved Projects</h3>
+                <div><a href="">See All</a></div>
+            </div>
+            <div class="list">
+                <div *ngFor="let project of approvedList"><app-tile [data]="project"></app-tile></div>
+            </div>
+        </div>
+
+        <div class="for-approval-section">
+            <div class="section">
+                <h3>Rejected Projects</h3>
+                <div><a href="">See All</a></div>
+            </div>
+            <div class="list">
+                <div *ngFor="let project of rejectedList"><app-tile [data]="project"></app-tile></div>
+            </div>
         </div>
     </div>
 </div>

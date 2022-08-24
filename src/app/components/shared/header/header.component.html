@@ -16,7 +16,7 @@
                 <button mat-button [matMenuTriggerFor]="profileSettings" class="name">D</button>
                 <mat-menu #profileSettings="matMenu">
                     <button mat-menu-item>Update Profile</button>
-                    <button mat-menu-item>Logout</button>
+                    <button mat-menu-item (click)="logout()">Logout</button>
                 </mat-menu>
             </div>
         </div>
