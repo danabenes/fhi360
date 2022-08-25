@@ -28,15 +28,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
   login() {
     this.apiService.postNoHeaders('auth', this.loginForm.value).subscribe(res => {
       localStorage.setItem('token', Object.values(res).toString());
-      this.router.navigate(['home']);
+      this.router.navigate(['home']).then(() => {
+        window.location.reload();
+      });
     },
     err => {
-      console.log(err.error);
       this.error = true;
       this.errorMessage = err.error['password'];
     });

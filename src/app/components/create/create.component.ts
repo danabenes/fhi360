@@ -31,6 +31,7 @@ export class CreateComponent implements OnInit {
   defaultPosition: number = 0;
   appendHtml: any;
   isTemplate: boolean = false;
+  templateFileName: string = 'UntitledDesign';
 
   constructor(
     private apiService: ApiService,
@@ -129,6 +130,10 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  getFileName(name: any) {
+    this.templateFileName = name;
+  }
+
   shareTemplate() {
     domtoimage.toPng(this.canvas.nativeElement, {quality: 0.99})
     .then(function (dataUrl) {
@@ -140,37 +145,33 @@ export class CreateComponent implements OnInit {
   }
 
   downloadDesign() {
-    let thumbnailImg:any;
-
-    let designData = {
-      title: "Template 1",
-      content: this.arrayOfElements,
-      thumbnail: ''
-    }
-
+    let thumbnailImg: any;
+    
     domtoimage.toPng(this.canvas.nativeElement)
-    .then(function (dataUrl) {
+    .then( async (dataUrl) => {
         thumbnailImg = new Image();
         thumbnailImg.src = dataUrl;
-        designData.thumbnail = thumbnailImg;
-    });
-    
-    setTimeout(() => {
-      console.log(designData);
-      this.apiService.postApi('me/projects', designData).subscribe(res => {
-        const details = {
-          type: 'prompt',
-          message: 'Design is submitted for review.'
-        }
-    
-        this.dialog.open(ModalComponent, {
-          width: '500px',
-          data: {
-            details: details,
-            actions: []
+
+        let designData: Object = {
+          title: this.templateFileName,
+          content: this.arrayOfElements,
+          file_upload: new File([thumbnailImg], this.templateFileName+'.png', {type: 'image/jpeg'})
+        };
+
+        this.apiService.postApi('me/projects', designData).subscribe(res => {
+          const details = {
+            type: 'prompt',
+            message: 'Design is submitted for review.'
           }
+      
+          this.dialog.open(ModalComponent, {
+            width: '500px',
+            data: {
+              details: details,
+              actions: []
+            }
+          });
         });
-      })
-    }, 5000);
+    });
   }
 }

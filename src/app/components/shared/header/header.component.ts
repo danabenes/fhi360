@@ -22,4 +22,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['create'])
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']).then(() => {
+      window.location.reload();
+    });
+  }
+
 }

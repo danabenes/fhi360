@@ -4,13 +4,21 @@
     <div class="section-container">
         <h2>Recent Designs</h2>
         <div class="list">
-            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent')"><app-tile [data]="template"></app-tile></div>
+            <div *ngFor="let design of designList" (click)="handleRecentDesign(design, 'withContent')">
+                <app-tile [data]="design">
+                    <img src={{design.url}}>
+                </app-tile>
+            </div>
         </div>
     </div>
     <div class="section-container">
         <h2>Recent Templates</h2>
         <div class="list">
-            <app-tile *ngFor="let design of designList" [data]="design"></app-tile>
+            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent')">
+                <app-tile [data]="template">
+                    <img src={{template.url}}>
+                </app-tile>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from 'src/app/services/api.service';
 import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
@@ -9,75 +10,31 @@ import { ModalComponent } from '../shared/modal/modal.component';
 })
 export class LandingPageComponent implements OnInit {
 
-  templateList = [{
-    id: '001',
-    bgColor: '#006168',
-    title: '#TBFREE PH FAQ Design #2',
-    category: 'Category'
-  }, {
-    id: '002',
-    bgColor: '#24b5bf',
-    title: 'Design #2',
-    category: 'Category'
-  }, {
-    id: '003',
-    bgColor: '#e5ca00',
-    title: 'Design #3',
-    category: 'Category'
-  }, {
-    id: '001',
-    bgColor: '#006168',
-    title: '#TBFREE PH FAQ Design #2',
-    category: 'Category'
-  }, {
-    id: '002',
-    bgColor: '#24b5bf',
-    title: 'Design #2',
-    category: 'Category'
-  }, {
-    id: '003',
-    bgColor: '#e5ca00',
-    title: 'Design #3',
-    category: 'Category'
-  }, {
-    id: '001',
-    bgColor: '#006168',
-    title: '#TBFREE PH FAQ Design #2',
-    category: 'Category'
-  }, {
-    id: '002',
-    bgColor: '#24b5bf',
-    title: 'Design #2',
-    category: 'Category'
-  }, {
-    id: '003',
-    bgColor: '#e5ca00',
-    title: 'Design #3',
-    category: 'Category'
-  }];
-
-  designList = [{
-    id: '001',
-    bgColor: '#006168',
-    title: '#TBFREE PH FAQ Design #2',
-    category: 'Category'
-  }, {
-    id: '002',
-    bgColor: '#24b5bf',
-    title: 'Design #2',
-    category: 'Category'
-  }, {
-    id: '003',
-    bgColor: '#e5ca00',
-    title: 'Design #3',
-    category: 'Category'
-  }];
+  templateList: any;
+  designList: any;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
+    this.getRecentDesigns();
+    this.getRecentTemplates();
+  }
+
+  getRecentDesigns() {
+    this.apiService.getApi('me/projects').subscribe(res => {
+      console.log(res);
+      this.designList = res;
+    });
+  }
+
+  getRecentTemplates() {
+    this.apiService.getApi('app/templates').subscribe(res => {
+      console.log(res);
+      this.templateList = res;
+    });
   }
 
   handleRecentDesign(details: any, type: string) {

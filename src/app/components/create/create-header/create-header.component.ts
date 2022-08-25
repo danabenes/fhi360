@@ -18,6 +18,7 @@ export class CreateHeaderComponent implements OnInit {
 
   @Output() share: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();
+  @Output() fileName: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public formBuilder: FormBuilder
@@ -44,9 +45,7 @@ export class CreateHeaderComponent implements OnInit {
     if(!this.setFileName) {
       this.templateFileName = this.templateForm.value.templateName ?  this.templateForm.value.templateName  : "Untitled Design" ;
     }
-    // setTimeout(() => {
-    //   this.fileNameInput.nativeElement.focus();
-    // }, 300);
+    this.fileName.emit(this.templateFileName);
   }
 
 }

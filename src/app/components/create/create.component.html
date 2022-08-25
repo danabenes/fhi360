@@ -1,4 +1,4 @@
-<app-create-header (share)="shareTemplate()" (download)="downloadDesign()"></app-create-header>
+<app-create-header (fileName)="getFileName($event)" (share)="shareTemplate()" (download)="downloadDesign()"></app-create-header>
 <app-create-sidebar (element)="addElement($event)"></app-create-sidebar>
 <div class="container">
     <div class="content" (click)="clickedOutside($event)">
