@@ -1,0 +1,7 @@
+<div *ngIf="totalPage > 1" class="container">
+    <p>Page: {{currentPage}} of {{totalPage}}</p>
+    <div class="action-btns">
+        <button (click)="handlePagination('prev')"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+        <button (click)="handlePagination('next')"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+    </div>
+</div>

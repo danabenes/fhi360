@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -38,6 +39,7 @@ import { ResizableModule } from 'angular-resizable-element';
 import { ApiService } from './services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PaginationComponent } from './components/shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ModalComponent,
     CreateHeaderComponent,
     CreateSidebarComponent,
-    RichTextToolbarComponent
+    RichTextToolbarComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTabsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

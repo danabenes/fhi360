@@ -52,7 +52,6 @@ $fhi-theme: mat.define-light-theme((
     font-family: 'Montserrat-Black';
     src: url('assets/fonts/Montserrat-Black.ttf') format('truetype');
 }
-
 /* You can add global styles to this file, and also import other style files */
 body, html {
     margin: 0;
@@ -68,6 +67,7 @@ body, html {
 .content-wrapper {
     padding: 90px 20px 0 120px;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .flex {
@@ -81,4 +81,10 @@ body, html {
         text-align: center;
         padding: 10px;
     }
+}
+
+.placeholder {
+    margin: 15px 0;
+    color: grayscale($color: gray);
+    text-align: center;
 }

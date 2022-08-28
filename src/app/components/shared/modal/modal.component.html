@@ -20,10 +20,22 @@
     </div>
     <div class="modal-container prompt" *ngIf="data.details.type === 'prompt'">
         <div class="modal-content">
-            <fa-icon [icon]="faCheck"></fa-icon>
             <div class="modal-content-details">
                 <div class="message">{{data.details.message}}</div>
-                <div class="btn prompt-btn" [mat-dialog-close]>OK</div>
+                <div class="action-btn" [mat-dialog-close]>OK</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-container option" *ngIf="data.details.type === 'option'">
+        <div class="modal-content">
+            <div class="modal-content-details">
+                <div class="message">{{data.details.message}}</div>
+                <div class="subtext">{{data.details.subtext}}</div>
+                <div class="btns-container">
+                    <div *ngFor="let actionBtn of data.actions"
+                    [style.color]="actionBtn.color"
+                    [style.background]="actionBtn.background" (click)="handleDialog(actionBtn.id)">{{actionBtn.label}} <span>{{actionBtn.sublabel}}</span></div>
+                </div>
             </div>
         </div>
     </div>
