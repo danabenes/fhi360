@@ -13,6 +13,15 @@ export class LandingPageComponent implements OnInit {
   templateList: any;
   designList: any;
 
+  templateCurrentPage: number = 1;
+  templateTotalPage: number = 1;
+  designCurrentPage: number = 1;
+  designTotalPage: number = 1;
+
+  designDisplay: boolean = false;
+  templateDisplay: boolean = true;
+
+
   constructor(
     public dialog: MatDialog,
     private apiService: ApiService
@@ -24,16 +33,22 @@ export class LandingPageComponent implements OnInit {
   }
 
   getRecentDesigns() {
-    this.apiService.getApi('me/projects').subscribe(res => {
-      console.log(res);
-      this.designList = res;
+    this.apiService.getApi('me/projects?page='+this.designCurrentPage).subscribe(res => {
+      if(res.status === 200) {
+        this.designTotalPage = res.headers.get('x-pagination-page-count');
+        this.designList = res.body;
+        this.designDisplay = this.designList.length ? true : false;
+      }
     });
   }
 
   getRecentTemplates() {
     this.apiService.getApi('app/templates').subscribe(res => {
-      console.log(res);
-      this.templateList = res;
+      if(res.status === 200) {
+        this.templateTotalPage = res.headers.get('x-pagination-page-count');
+        this.templateList = res.body;
+        this.templateDisplay = this.templateList.length ? true: false;
+      }
     });
   }
 
@@ -55,6 +70,16 @@ export class LandingPageComponent implements OnInit {
         }]
       }
     });
+  }
+
+  pagination(section: string, value: any) {
+    if(section === 'design') {
+      this.designCurrentPage = value;
+      this.getRecentDesigns();
+    } else {
+      this.templateCurrentPage = value;
+      this.getRecentTemplates();
+    }
   }
 
 }

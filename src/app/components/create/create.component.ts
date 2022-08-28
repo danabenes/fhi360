@@ -40,7 +40,27 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.arrayOfElements.push({type: 'background', color: 'white'});
+    this.arrayOfElements.push({type: 'background', bg: 'white'});
+
+    const details = {
+      type: 'prompt',
+      message: 'Design is submitted for review.'
+    }
+
+    this.dialog.open(ModalComponent, {
+      width: '500px',
+      data: {
+        details: details,
+        actions: [
+          {
+            id: 'ok',
+            label: 'Ok',
+            color: 'white',
+            background: '#36a592'
+          }
+        ]
+      }
+    });
   }
 
   clickedOutside(element:any) {
@@ -72,6 +92,8 @@ export class CreateComponent implements OnInit {
     for (let index = 0; index < elements.length; index++) {
       this.arrayOfElements.push(elements[index]);
     }
+
+    this.backgroundColor = this.arrayOfElements[0].bg ? this.arrayOfElements[0].bg : 'white';
   }
 
   selectElement(index: number) {
@@ -79,8 +101,14 @@ export class CreateComponent implements OnInit {
 
     // set size
     const element = document.getElementById('elementImageWrapper'+index);
-    this.arrayOfElements[index].width = element?.style.width;
-    this.arrayOfElements[index].height = element?.style.height;
+    const text = document.getElementById('textWrapper'+index);
+    if(this.arrayOfElements[index].type === 'element') {
+      this.arrayOfElements[index].width = element?.style.width;
+      this.arrayOfElements[index].height = element?.style.height;
+    } else {
+      this.arrayOfElements[index].width = text?.style.width;
+      this.arrayOfElements[index].height = text?.style.height;
+    }
   }
   
 
@@ -158,20 +186,55 @@ export class CreateComponent implements OnInit {
           file_upload: new File([thumbnailImg], this.templateFileName+'.png', {type: 'image/jpeg'})
         };
 
-        this.apiService.postApi('me/projects', designData).subscribe(res => {
-          const details = {
-            type: 'prompt',
-            message: 'Design is submitted for review.'
+        const details = {
+          type: 'option',
+          message: 'Are you done with branding?',
+          subtext: 'Make sure to include all necessary logos on your design'
+        }
+    
+        let dialogRef = this.dialog.open(ModalComponent, {
+          width: '700px',
+          data: {
+            details: details,
+            actions: [
+              {
+                id: 'yes',
+                label: 'Yes,',
+                sublabel: ' Action',
+                color: 'white',
+                background: '#36a592'
+              }, {
+                id: 'no',
+                label: 'No',
+                color: 'black',
+                background: '#ffd1d1'
+              }
+            ]
           }
-      
-          this.dialog.open(ModalComponent, {
-            width: '500px',
-            data: {
-              details: details,
-              actions: []
-            }
-          });
         });
+    
+        dialogRef.afterClosed().subscribe( result => {
+          if(result === 'yes') {
+            this.submitDesign(designData);
+          }
+        });
+    });
+  }
+
+  submitDesign(data: any) {
+    this.apiService.postApi('me/projects', data).subscribe(res => {
+      const details = {
+        type: 'prompt',
+        message: 'Design is submitted for review.'
+      }
+
+      this.dialog.open(ModalComponent, {
+        width: '500px',
+        data: {
+          details: details,
+          actions: []
+        }
+      });
     });
   }
 }

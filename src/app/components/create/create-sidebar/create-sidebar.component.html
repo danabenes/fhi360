@@ -14,10 +14,6 @@
                     <fa-icon [icon]="faFont"></fa-icon><br>
                     <span>Text</span>
                 </li>
-                <!-- <li (click)="showList('image')" [ngClass]="{'isActive': currentTab === 'image'}">
-                    <fa-icon [icon]="faImages"></fa-icon><br>
-                    <span>Image</span>
-                </li> -->
                 <li (click)="showList('elements')" [ngClass]="{'isActive': currentTab === 'elements'}">
                     <fa-icon [icon]="faImages"></fa-icon><br>
                     <span>Elements</span>
@@ -46,19 +42,10 @@
                     </div>
                     <div class="selected-list">
                         <div class="tile" *ngFor="let template of currentElementList" (click)="addElement('template', template)">
-                            <img src={{template.thumbnail}} />
+                            <img src={{template.thumbnail}}  onerror="this.onerror=null; this.src='assets/images/template_placeholder.png'"/>
                         </div>
                     </div>
                 </div>
-
-                <!-- IMAGE -->
-                <!-- <div class="bg-images" *ngIf="currentTab === 'image'">
-                    <div class="image-list" >
-                        <div *ngFor="let imageElem of currentElementList" (click)="addElement('image', imageElem )">
-                            <img src="{{imageElem.url}}">
-                        </div>
-                    </div>
-                </div> -->
 
                 <!-- UPLOAD -->
                 <div class="uploaded-images" *ngIf="currentTab === 'upload'">

@@ -62,19 +62,19 @@ export class CreateSidebarComponent implements OnInit {
   getTemplateList() {
     this.apiService.getApi('me/projects').subscribe(res => {
       console.log(res);
-      this.currentElementList = res; 
+      this.currentElementList = res.body; 
     });
   }
 
   getUploadedImageList() {
     this.apiService.getApi('me/images').subscribe(res => {
-      this.currentElementList = res; 
+      this.currentElementList = res.body; 
     });
   }
 
   getImages() {
     this.apiService.getApi('me/images?category='+this.selectedCategory).subscribe(res => {
-      this.currentElementList = res; 
+      this.currentElementList = res.body; 
     });
   }
 

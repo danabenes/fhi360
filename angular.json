@@ -78,7 +78,8 @@
               "browserTarget": "fhi:build:production"
             },
             "development": {
-              "browserTarget": "fhi:build:development"
+              "browserTarget": "fhi:build:development",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"

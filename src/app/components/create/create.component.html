@@ -29,11 +29,14 @@
                                 [style.font-style]="element.fontStyle"
                                 [style.font-weight]="element.fontWeight"
                                 [style.color]="element.textColor"
+                                [style.width]="element.width"
+                                [style.height]="element.height"
                                 matInput
                                 cdkTextareaAutosize
                                 autofocus
                                 #autosize="cdkTextareaAutosize"
                                 cdkAutosizeMinRows="1"
+                                id="textWrapper{{indexOfelement+1}}"
                                 (input)="getTextValue($event)">{{element.textValue ? element.textValue : 'Add text here'}}</textarea>
                             <!-- END TEXTAREA -->
     

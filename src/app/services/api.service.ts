@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class ApiService {
@@ -25,7 +26,12 @@ export class ApiService {
     }
 
     getApi(endpoint: string) {
-        return this.http.get(this.baseUrl + endpoint, { headers:this.headers });
+        return this.http.get(this.baseUrl + endpoint, {observe: 'response', 'headers': this.headers}).pipe(
+            map((resp: any) => {
+               return resp;
+            })
+        );
+        // return this.http.get(this.baseUrl + endpoint, { 'headers': this.headers });
     }
 
     postApi(endpoint: string, data : any) {

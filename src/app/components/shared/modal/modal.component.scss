@@ -88,44 +88,74 @@
         padding: 0;
         
         .modal-content {
-            padding: 0;
-
-            fa-icon {
-                background: green;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                color: white;
-                font-size: 20px;
-                border-top-right-radius: 10px;
-                border-top-left-radius: 10px;
-            }
-
             .modal-content-details {
-                padding: 10px 20px 25px 20px;
+                padding: 20px;
 
                 .message {
-                    margin: 20px;
+                    font-size: 1.5em;
+                    line-height: 1.2em;
                     text-align: center;
-                    font-size: 16px;
-                }
-    
-                .prompt-btn {
-                    background-color: #fa9e3d;
-                    width: 100%;
-                    padding: 15px;
-                    border-radius: 10px;
-                    text-align: center;
-                    color: white;
-                    font-size: 18px;
                     font-family: "Montserrat-Bold";
+                }
+
+                .action-btn {
+                    margin-top: 40px;
+                    background-color: #36a592;
+                    color:white;
+                    text-align: center;
+                    padding: 15px 0;
+                    font-size: 1.3em;
+                    font-weight: bolder;
+                    text-transform: uppercase;
                     cursor: pointer;
-                    margin-top: 35px;
+
                 }
             }
         }
+    }
+
+    .option {
+        display: flex;
+
+        .modal-content-details {
+            justify-content: center;
+            text-align: center;
+
+            .message {
+                font-size: 3em;
+                line-height: 1.2em;
+                text-align: center;
+                font-family: "Montserrat-Bold";
+                color: #006168;
+            }
+            
+            .subtext {
+                margin: 10px 0 40px 0;
+                color: grayscale($color: gray);
+            }
+
+            .btns-container {
+                display: flex;
+                cursor: pointer;
+
+                & > div {
+                    flex: 1;
+                    justify-content: space-between;
+                    margin: 0 10px;
+                    padding: 15px 0;
+                    font-size: 1.3em;
+                    font-weight: bolder;
+                    text-transform: uppercase;
+                    font-family: 'Montserrat-Bold';
+
+                    span {
+                        font-style: italic;
+                        pointer-events: none;
+                    }
+                }
+            }
+        }
+
     }
 }
 

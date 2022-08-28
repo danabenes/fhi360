@@ -2,37 +2,42 @@
 <app-sidebar></app-sidebar>
 <div class="content-wrapper">
     <div class="section-container">
-        <h2 class="fw-bold">Project Designs</h2>
-        <hr class="section-separator">
-        
-        <div class="for-approval-section">
-            <div class="section">
-                <h3 class="fw-bold">For Review</h3>
-                <div><a href="">See All</a></div>
-            </div>
-            <div class="list">
-                <div *ngFor="let project of forApprovalList"><app-tile [data]="project"></app-tile></div>
-            </div>
-        </div>
+        <h2>Projects</h2>
 
-        <div class="approved-section">
-            <div class="section">
-                <h3 class="fw-bold">Approved Projects</h3>
-                <div><a href="">See All</a></div>
-            </div>
-            <div class="list">
-                <div *ngFor="let project of approvedList"><app-tile [data]="project"></app-tile></div>
-            </div>
-        </div>
-
-        <div class="rejected-section">
-            <div class="section">
-                <h3 class="fw-bold">Rejected Projects</h3>
-                <div><a href="">See All</a></div>
-            </div>
-            <div class="list">
-                <div *ngFor="let project of rejectedList"><app-tile [data]="project"></app-tile></div>
-            </div>
-        </div>
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="For Approval">
+                <div *ngIf="forApprovalListDisplay">
+                    <div class="project-container">
+                        <div class="list">
+                            <div *ngFor="let project of forApprovalList"><app-tile [data]="project"></app-tile></div>
+                        </div>
+                    </div>
+                    <app-pagination class="pagination" [totalPage]="forApprovalTotalPage" [currentPage]="forApprovalCurrentPage" (newPage)="pagination('forApproval', $event)"></app-pagination>
+                </div>
+                <div class="placeholder" *ngIf="!forApprovalListDisplay">No data to display</div>
+            </mat-tab>
+            <mat-tab label="Approved">
+                <div *ngIf="approvedListDisplay">
+                    <div class="project-container">
+                        <div class="list">
+                            <div *ngFor="let project of approvedList"><app-tile [data]="project"></app-tile></div>
+                        </div>
+                    </div>
+                    <app-pagination class="pagination" [totalPage]="approvedTotalPage" [currentPage]="approvedCurrentPage" (newPage)="pagination('approved', $event)"></app-pagination>
+                </div>
+                <div class="placeholder" *ngIf="!approvedListDisplay">No data to display</div>
+            </mat-tab>
+            <mat-tab label="Rejected">
+                <div *ngIf="rejectedListDisplay">
+                    <div class="project-container">
+                        <div class="list">
+                            <div *ngFor="let project of rejectedList"><app-tile [data]="project"></app-tile></div>
+                        </div>
+                    </div>
+                    <app-pagination class="pagination" [totalPage]="rejectedTotalPage" [currentPage]="rejectedCurrentPage" (newPage)="pagination('rejected', $event)"></app-pagination>
+                </div>
+                <div class="placeholder" *ngIf="!rejectedListDisplay">No data to display</div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>

@@ -12,6 +12,11 @@ export class TemplatesComponent implements OnInit {
 
   templateList: any;
 
+  templateCurrentPage: number = 1;
+  templateTotalPage: number = 1;
+
+  templateDisplay: boolean = false;
+
   constructor(
     public dialog: MatDialog,
     private apiService: ApiService
@@ -22,8 +27,12 @@ export class TemplatesComponent implements OnInit {
   }
 
   getTemplateList() {
-    this.apiService.getApi('app/templates').subscribe(res => {
-      this.templateList = res;
+    this.apiService.getApi('app/templates?page='+this.templateCurrentPage).subscribe(res => {
+      if(res.status == 200) {
+        this.templateTotalPage = res.headers.get('x-pagination-page-count');
+        this.templateList = res.body;
+        this.templateDisplay = this.templateList.length ? true : false;
+      }
     });
   }
 
@@ -40,6 +49,11 @@ export class TemplatesComponent implements OnInit {
         }]
       }
     });
+  }
+
+  pagination(value: any) {
+    this.templateCurrentPage = value;
+    this.getTemplateList();
   }
 
 }
