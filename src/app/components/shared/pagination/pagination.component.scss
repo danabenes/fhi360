@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        margin: 0;
+    }
+    
+    .action-btns {
+        margin: 0 0 0 10px;
+
+        button {
+            margin: 3px;
+            cursor: pointer;
+
+            fa-icon {
+                pointer-events: none;
+            }
+        }
+    }
+}

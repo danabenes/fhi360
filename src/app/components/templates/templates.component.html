@@ -3,8 +3,14 @@
 <div class="content-wrapper">
     <div class="section-container">
         <h2>Templates</h2>
-        <div class="list">
-            <div *ngFor="let template of templateList" (click)="useTemplate(template, 'withContent')"><app-tile [data]="template"></app-tile></div>
+        <div *ngIf="templateDisplay">
+            <div class="list">
+                <div *ngFor="let template of templateList" (click)="useTemplate(template, 'withContent')"><app-tile [data]="template"></app-tile></div>
+            </div>
+            <app-pagination [totalPage]="templateTotalPage" [currentPage]="templateCurrentPage" (newPage)="pagination($event)"></app-pagination>
+        </div>
+        <div class="placeholder" *ngIf="!templateDisplay">
+            No data to display
         </div>
     </div>
 </div>

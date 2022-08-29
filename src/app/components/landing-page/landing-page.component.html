@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <div class="content-wrapper">
-    <div class="section-container">
+    <div class="section-container" *ngIf="designDisplay">
         <h2>Recent Designs</h2>
         <div class="list">
             <div *ngFor="let design of designList" (click)="handleRecentDesign(design, 'withContent')">
@@ -10,8 +10,9 @@
                 </app-tile>
             </div>
         </div>
+        <app-pagination [totalPage]="designTotalPage" [currentPage]="designCurrentPage" (newPage)="pagination('design', $event)"></app-pagination>
     </div>
-    <div class="section-container">
+    <div class="section-container" *ngIf="templateDisplay">
         <h2>Recent Templates</h2>
         <div class="list">
             <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent')">
