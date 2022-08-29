@@ -1,0 +1,117 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.container .editor-icons, .container .delete {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .editor-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.container .editor-icons .bg-color {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.container .editor-icons .bg-color span {
+  width: 100%;
+  height: 100%;
+  border: 1px solid gainsboro;
+  display: block;
+  border-radius: 5px;
+}
+
+.container .editor-icons .font-style {
+  width: 180px;
+  border: 1px solid gainsboro;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 4px 6px 4px 5px;
+  border-radius: 5px;
+}
+
+.container .editor-icons .font-size {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0 10px;
+}
+
+.container .editor-icons .font-size p {
+  width: 30px;
+  text-align: center;
+  border: 1px solid gainsboro;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 0;
+  padding: 4px;
+  font-size: 10px;
+}
+
+.container .editor-icons .font-size p.size-value {
+  width: 60px;
+  border-right: 0;
+  border-left: 0;
+  font-size: 15px;
+}
+
+.container .editor-icons .font-size p.minus {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.container .editor-icons .font-size p.add {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.container .editor-icons .text-color {
+  background: none !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+
+.container .editor-icons .font-bold, .container .editor-icons .font-italic {
+  width: 30px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container .editor-icons .wh-30 svg {
+  width: 30px;
+  height: 30px;
+}
+/*# sourceMappingURL=rich-text-toolbar.component.css.map */

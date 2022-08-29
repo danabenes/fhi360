@@ -1,0 +1,158 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  border-bottom: 1px solid #669383;
+  z-index: 2;
+  background-color: #669383;
+  padding: 0 20px;
+}
+
+.wrapper-create {
+  background: -webkit-gradient(linear, left top, right top, from(#0B737B), to(#FFC990));
+  background: linear-gradient(90deg, #0B737B, #FFC990);
+}
+
+.wrapper .content {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+  color: white;
+}
+
+.wrapper .content .menu-container {
+  list-style: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper .content .menu-container li, .wrapper .content .menu-container a {
+  margin: 0 10px;
+  font-size: 13pt;
+  font-family: 'Montserrat-SemiBold';
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  color: white;
+}
+
+.wrapper .content .menu-container li .file, .wrapper .content .menu-container a .file {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  background-color: transparent;
+  color: white;
+  font-size: 13pt;
+  font-family: 'Montserrat-SemiBold';
+  cursor: pointer;
+}
+
+.wrapper .content .menu-container li fa-icon, .wrapper .content .menu-container a fa-icon {
+  margin-right: 8px;
+}
+
+.wrapper .content .menu-container li .header-title, .wrapper .content .menu-container a .header-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.wrapper .content .menu-container li .header-title h4, .wrapper .content .menu-container a .header-title h4 {
+  font-family: 'Montserrat-Bold';
+  margin: 0;
+}
+
+.wrapper .content .menu-container li .submenu, .wrapper .content .menu-container a .submenu {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  top: 25px;
+  color: #8b9393;
+  font-size: 9pt;
+  display: none;
+}
+
+.wrapper .content .menu-container li .submenu .menu, .wrapper .content .menu-container a .submenu .menu {
+  padding-bottom: 5px;
+}
+
+.wrapper .content .menu-container li:hover > .submenu, .wrapper .content .menu-container a:hover > .submenu {
+  display: block;
+}
+
+.wrapper .content .menu-container .home-link:hover fa-icon, .wrapper .content .menu-container .home-link:hover a {
+  color: #006168;
+}
+
+.wrapper .content .btn-container {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .content .btn-container .btn {
+  padding: 10px 20px;
+  text-align: center;
+  font-family: 'Montserrat-Bold';
+  border-radius: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.wrapper .content .btn-container .share {
+  background-color: #fa9e3d;
+}
+
+.wrapper .content .btn-container .download {
+  background-color: #006168;
+}
+
+::ng-deep .mat-menu-item {
+  width: 230px !important;
+  line-height: 2em !important;
+  height: auto !important;
+}
+
+::ng-deep .mat-menu-item .file-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: #36878d;
+  border-bottom: 2px solid #669383;
+  font-family: 'Montserrat-Bold';
+}
+
+::ng-deep .mat-menu-item .file-title p {
+  margin: 0;
+}
+/*# sourceMappingURL=create-header.component.css.map */

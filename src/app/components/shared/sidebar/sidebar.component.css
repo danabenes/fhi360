@@ -1,0 +1,58 @@
+.sidebar-container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  margin-top: 80px;
+  width: 100px;
+  background-color: #fafafa;
+  z-index: 2;
+}
+
+.sidebar-container .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sidebar-container .content > div {
+  text-align: center;
+  max-width: 80px;
+  padding: 10px 15px;
+  margin: 10px 0 0 0;
+  color: #006168;
+  font-size: 15pt;
+  cursor: pointer;
+}
+
+.sidebar-container .content > div span {
+  font-size: 8pt;
+  pointer-events: none;
+}
+
+.sidebar-container .content > div fa-icon {
+  pointer-events: none;
+}
+
+.sidebar-container .content a {
+  text-decoration: none;
+  color: #006168;
+}
+
+.sidebar-container .content .isActive {
+  background-color: #ededed;
+  border-radius: 5px;
+}
+
+.sidebar-container .content .isActive a {
+  text-decoration: none;
+  color: #006168;
+}
+/*# sourceMappingURL=sidebar.component.css.map */

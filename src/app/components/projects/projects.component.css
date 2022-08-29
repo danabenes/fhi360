@@ -1,0 +1,65 @@
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat';
+  color: #006168;
+}
+
+.section-container {
+  height: 100%;
+}
+
+.section-container .section-separator {
+  color: #f7f7f7;
+}
+
+.section-container h2 {
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-container .project-container {
+  padding: 15px;
+  height: 100%;
+}
+
+.section-container .section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.section-container .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.section-container .list > div {
+  margin-right: 20px;
+}
+
+.section-container .pagination {
+  margin-top: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #006168;
+}
+
+::ng-deep .mat-tab-body {
+  height: 100%;
+}
+/*# sourceMappingURL=projects.component.css.map */

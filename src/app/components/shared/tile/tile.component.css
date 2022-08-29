@@ -1,0 +1,46 @@
+.container {
+  max-width: 180px;
+  cursor: pointer;
+  margin-bottom: 3em;
+}
+
+.container .content .image-container {
+  background-color: #f8f8f8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 15px;
+  border-radius: 10px;
+  background-image: url("../../../../assets/images/template_placeholder.png");
+  background-size: 100% 100%;
+  -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.container .content .image-container .image {
+  width: 150px;
+  height: 150px;
+}
+
+.container .content .content-details {
+  margin-top: 10px;
+}
+
+.container .content .content-details p {
+  margin: 0;
+  font-size: 9pt;
+}
+
+.container .content .content-details .title {
+  font-family: 'Montserrat-SemiBold';
+}
+
+.container .content .content-details .category {
+  font-size: 8pt;
+}
+/*# sourceMappingURL=tile.component.css.map */

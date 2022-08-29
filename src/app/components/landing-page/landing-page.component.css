@@ -1,0 +1,27 @@
+.section-container {
+  margin-bottom: 5em;
+}
+
+.section-container h2 {
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-container .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.section-container .list div {
+  margin-right: 20px;
+}
+/*# sourceMappingURL=landing-page.component.css.map */

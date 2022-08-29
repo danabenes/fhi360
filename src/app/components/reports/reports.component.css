@@ -1,0 +1,27 @@
+.section-container h2 {
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-container .tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2em;
+}
+
+.section-container .tabs > div {
+  margin: 0 20px 0 0;
+  color: #006168;
+  cursor: pointer;
+}
+
+.section-container .tabs > div.isActive {
+  border-bottom: 4px solid #006168;
+  padding-bottom: 2px;
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-container .content {
+  margin-top: 4em;
+}
+/*# sourceMappingURL=reports.component.css.map */

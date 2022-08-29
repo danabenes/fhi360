@@ -1,0 +1,98 @@
+.section-content .filter-download {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.section-content .filter-download .filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+}
+
+.section-content .filter-download .filters > div {
+  width: 100%;
+  padding-right: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.section-content .filter-download .filters select {
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #e1e1e1;
+  color: #a5a5a5;
+}
+
+.section-content .filter-download .filters .search {
+  position: relative;
+}
+
+.section-content .filter-download .filters .search input {
+  padding: 9px 8px 9px 28px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #e1e1e1;
+  color: #a5a5a5;
+}
+
+.section-content .filter-download .filters .search fa-icon {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  color: #a5a5a5;
+}
+
+.section-content .filter-download .filters .region {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+}
+
+.section-content .filter-download .filters .organization {
+  -webkit-box-flex: 1.2;
+      -ms-flex: 1.2 1 0px;
+          flex: 1.2 1 0;
+}
+
+.section-content .filter-download .download {
+  width: 180px;
+}
+
+.section-content .filter-download .download .btn {
+  background-color: #f8870b;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-content table.mat-table {
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin-top: 20px;
+  color: #7e7e7e;
+}
+
+.section-content table.mat-table .mat-header-cell {
+  color: black;
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-content table.mat-table .mat-cell {
+  color: #7e7e7e;
+}
+/*# sourceMappingURL=reports-datatable.component.css.map */

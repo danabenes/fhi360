@@ -1,0 +1,113 @@
+.wrapper {
+  background-color: #dbe7ea;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.wrapper .content {
+  width: 600px;
+  text-align: center;
+  color: #6f7070;
+}
+
+.wrapper .content a {
+  text-decoration: none;
+  color: #2673f3;
+  font-family: 'Montserrat-Bold';
+}
+
+.wrapper .content img {
+  max-width: 200px;
+}
+
+.wrapper .content h1 {
+  font-family: 'Montserrat-Black';
+  color: #006168;
+  font-size: 20pt;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.wrapper .content h2 {
+  text-align: left;
+  color: #006168;
+  font-size: 16pt;
+  font-family: 'Montserrat-Bold';
+  margin-bottom: 10px;
+}
+
+.wrapper .content form {
+  color: #8e9293;
+  margin-top: 2em;
+}
+
+.wrapper .content form .field-container {
+  margin: 10px 0;
+}
+
+.wrapper .content form .field-container input {
+  padding: 15px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+}
+
+.wrapper .content form .psw-container, .wrapper .content form .name-container, .wrapper .content form .cr-container {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.wrapper .content form .psw-container > div, .wrapper .content form .name-container > div, .wrapper .content form .cr-container > div {
+  width: 48%;
+}
+
+.wrapper .content form .personal {
+  margin-top: 1em;
+}
+
+.wrapper .content form .cr-container select {
+  width: 100%;
+  padding: 14px 10px;
+  border: 0;
+  color: #6f7070;
+}
+
+.wrapper .content form .btn-container {
+  margin: 2em 0;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.wrapper .content form .btn-container .btn {
+  width: 180px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 15px;
+  font-size: 12pt;
+  font-family: 'Montserrat-Bold';
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wrapper .content form .btn-container .submit {
+  background-color: #006168;
+  color: white;
+}
+
+.wrapper .content form .btn-container .cancel {
+  background-color: #ffd1d1;
+  color: black;
+}
+/*# sourceMappingURL=signup.component.css.map */

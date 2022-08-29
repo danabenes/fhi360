@@ -1,0 +1,20 @@
+.section-container h2 {
+  font-family: 'Montserrat-SemiBold';
+}
+
+.section-container .list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.section-container .list > div {
+  margin-right: 20px;
+}
+/*# sourceMappingURL=templates.component.css.map */

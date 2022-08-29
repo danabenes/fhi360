@@ -1,0 +1,129 @@
+.wrapper {
+  background-color: #dbe7ea;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.wrapper .content {
+  width: 400px;
+  text-align: center;
+}
+
+.wrapper .content img {
+  max-width: 200px;
+}
+
+.wrapper .content h1 {
+  font-family: 'Montserrat-Black';
+  color: #006168;
+  font-size: 25pt;
+  line-height: 1.4;
+  margin: 20px 0 0 0;
+}
+
+.wrapper .content form {
+  color: #8e9293;
+}
+
+.wrapper .content form a {
+  text-decoration: none;
+  color: #2673f3;
+}
+
+.wrapper .content form .field-container {
+  margin: 10px 0;
+}
+
+.wrapper .content form .field-container input {
+  padding: 15px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+}
+
+.wrapper .content form .rf-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 9pt;
+}
+
+.wrapper .content form .rf-container .remember {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .content form .rf-container .remember label {
+  cursor: pointer;
+}
+
+.wrapper .content form .btn-container {
+  margin: 10px 0;
+}
+
+.wrapper .content form .btn-container .btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #35a592;
+  color: white;
+  font-family: 'Montserrat-Bold';
+  font-size: 12pt;
+}
+
+.wrapper .content form .btn-container .disable {
+  background-color: #8e9293;
+  pointer-events: none;
+}
+
+.wrapper .content form .create-account {
+  text-align: left;
+  font-size: 9pt;
+}
+
+.wrapper .content form .create-account a {
+  font-family: 'Montserrat-Bold';
+  text-decoration: none;
+  color: #2673f3;
+}
+
+.wrapper .content form p {
+  text-align: left;
+  margin: 0;
+  font-size: 9pt;
+}
+
+.wrapper .content form p a {
+  color: #8e9293;
+  text-decoration: underline;
+}
+
+.wrapper .content .errorMessage {
+  margin: 0;
+  height: 20px;
+  color: red;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+/*# sourceMappingURL=login.component.css.map */
