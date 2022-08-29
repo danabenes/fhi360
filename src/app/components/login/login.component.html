@@ -22,7 +22,7 @@
                 <div class="btn" [ngClass]="{'disable': !loginForm.valid}" (click)="login()">Log in</div>
             </div>
             <div class="create-account">
-                <p>No account yet? <a href="" [routerLink]="['/signup']">Create your own account in seconds</a>.</p>
+                <p>No account yet? <a href="http://54.251.31.63/admin/index.php?r=site%2Fsignup" >Create your own account in seconds</a>.</p>
             </div>
             <hr>
             <p>By continuing, you agree to Healthy Lungs' <a href="">Terms of Use</a>.</p>
@@ -30,3 +30,5 @@
         </form>
     </div>
 </div>
+
+<!-- [routerLink]="['/signup']" old signup link in case needed to revert -->

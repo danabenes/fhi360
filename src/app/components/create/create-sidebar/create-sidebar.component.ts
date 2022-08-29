@@ -61,7 +61,6 @@ export class CreateSidebarComponent implements OnInit {
 
   getTemplateList() {
     this.apiService.getApi('me/projects').subscribe(res => {
-      console.log(res);
       this.currentElementList = res.body; 
     });
   }
@@ -79,13 +78,11 @@ export class CreateSidebarComponent implements OnInit {
   }
 
   addElement(type: string, data: any) {
-    console.log(data);
     data.type = type;
     this.element.emit(data);
   }
 
   selectImage(imageDetails: any) {
-    console.log(imageDetails);
     this.selectedImage = imageDetails.target.files[0];
     this.selectedFileName = imageDetails.target.files[0].name;
     this.enableUploadBtn = true;

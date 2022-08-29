@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper wrapper-create">
     <div class="content flex">
         <ul class="menu-container">
             <li class="home-link"><fa-icon [icon]="faAngleLeft"></fa-icon><a href="" [routerLink]="['/home']">Home</a></li>
@@ -30,15 +30,8 @@
                         <!-- <h4>Untitled Design</h4>
                         <div></div> -->
                     </div>
-<<<<<<< Updated upstream
-                    <div mat-menu-item>Create New Design</div>
-                    <div mat-menu-item>Download</div>
-                    <div mat-menu-item>Share</div>
-                    <div mat-menu-item>Save</div>
-=======
                     <div mat-menu-item (click)="createNewDesign()">Create New Design</div>
                     <div mat-menu-item>Submit for Review</div>
->>>>>>> Stashed changes
                 </mat-menu>
             </li>
         </ul>
@@ -47,7 +40,7 @@
             <div class="btn share" (click)="saveAsImage()">Share</div>
             <div class="btn download" (click)="downloadDesign()">Download</div>
             -->
-            <div class="btn share" (click)="downloadDesign()">Submit for Review</div>
+            <div class="btn download" (click)="downloadDesign()">Submit for Review</div>
         </div>
     </div>
 </div>

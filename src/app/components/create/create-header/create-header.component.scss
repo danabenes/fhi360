@@ -9,6 +9,10 @@
     background-color: #669383;
     padding: 0 20px;
 
+    &-create {
+        background: linear-gradient(90deg, #0B737B, #FFC990);
+    }
+
     .content {
         justify-content: space-between;
         height: 100%;
