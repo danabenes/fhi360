@@ -19,6 +19,7 @@ export class CreateHeaderComponent implements OnInit {
   @Output() share: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();
   @Output() fileName: EventEmitter<any> = new EventEmitter();
+  @Output() create: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public formBuilder: FormBuilder
@@ -33,6 +34,10 @@ export class CreateHeaderComponent implements OnInit {
 
   saveAsImage() {
     this.share.emit();
+  }
+
+  createNewDesign() {
+    this.create.emit();
   }
 
   downloadDesign() {

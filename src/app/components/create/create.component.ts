@@ -35,32 +35,12 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { 
   }
 
   ngOnInit(): void {
     this.arrayOfElements.push({type: 'background', bg: 'white'});
-
-    const details = {
-      type: 'prompt',
-      message: 'Design is submitted for review.'
-    }
-
-    this.dialog.open(ModalComponent, {
-      width: '500px',
-      data: {
-        details: details,
-        actions: [
-          {
-            id: 'ok',
-            label: 'Ok',
-            color: 'white',
-            background: '#36a592'
-          }
-        ]
-      }
-    });
   }
 
   clickedOutside(element:any) {
@@ -162,6 +142,11 @@ export class CreateComponent implements OnInit {
     this.templateFileName = name;
   }
 
+  createNewDesign() {
+    this.arrayOfElements = [];
+    this.arrayOfElements.push({type: 'background', bg: 'white'});
+  }
+
   shareTemplate() {
     domtoimage.toPng(this.canvas.nativeElement, {quality: 0.99})
     .then(function (dataUrl) {
@@ -200,7 +185,7 @@ export class CreateComponent implements OnInit {
               {
                 id: 'yes',
                 label: 'Yes,',
-                sublabel: ' Action',
+                sublabel: ' Submit',
                 color: 'white',
                 background: '#36a592'
               }, {
@@ -227,12 +212,19 @@ export class CreateComponent implements OnInit {
         type: 'prompt',
         message: 'Design is submitted for review.'
       }
-
+  
       this.dialog.open(ModalComponent, {
         width: '500px',
         data: {
           details: details,
-          actions: []
+          actions: [
+            {
+              id: 'ok',
+              label: 'Ok',
+              color: 'white',
+              background: '#36a592'
+            }
+          ]
         }
       });
     });
