@@ -1,10 +1,11 @@
+<app-preloader [handlePreloader]="preloaderStatus"></app-preloader>
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <div class="content-wrapper">
     <div class="section-container" *ngIf="designDisplay">
         <h2>Recent Designs</h2>
         <div class="list">
-            <div *ngFor="let design of designList" (click)="handleRecentDesign(design, 'withContent')">
+            <div *ngFor="let design of designList" (click)="handleRecentDesign(design, 'withContent', 'design')">
                 <app-tile [data]="design">
                     <img src={{design.url}}>
                 </app-tile>
@@ -15,7 +16,7 @@
     <div class="section-container" *ngIf="templateDisplay">
         <h2>Recent Templates</h2>
         <div class="list">
-            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent')">
+            <div *ngFor="let template of templateList" (click)="handleRecentDesign(template, 'withContent', 'template')">
                 <app-tile [data]="template">
                     <img src={{template.url}}>
                 </app-tile>

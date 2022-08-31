@@ -1,16 +1,20 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild } from '@angular/core';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import domtoimage from 'dom-to-image';
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../shared/modal/modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe = new Subject();
 
   @ViewChild('canvas')canvas!: ElementRef;
   @ViewChild('screen')screen!: ElementRef;
@@ -33,14 +37,35 @@ export class CreateComponent implements OnInit {
   isTemplate: boolean = false;
   templateFileName: string = 'UntitledDesign';
 
+  preloaderStatus: boolean = false;                                                                        
+
   constructor(
     private apiService: ApiService,
     public dialog: MatDialog,
+    private route: ActivatedRoute
   ) { 
   }
 
   ngOnInit(): void {
+    this.route.paramMap.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+      if(res.get('category') || res.get('id')) {
+        this.getTemplateDetails(res.get('category'), res.get('id'));
+      }
+    });
     this.arrayOfElements.push({type: 'background', bg: 'white'});
+  }
+
+  getTemplateDetails(category: any, id: any) {
+    let url = '';
+    if(category === 'design') {
+      url = 'me/projects';
+    } else {
+      url = 'app/templates';
+    }
+
+    this.apiService.getApi(url).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => {
+      this.createTemplate(res['body'].find((data: { id: any; }) => data.id === id).content);
+    })
   }
 
   clickedOutside(element:any) {
@@ -70,7 +95,7 @@ export class CreateComponent implements OnInit {
 
   createTemplate(elements: any) {
     for (let index = 0; index < elements.length; index++) {
-      this.arrayOfElements.push(elements[index]);
+      this.arrayOfElements.push(JSON.parse(elements[index]));
     }
 
     this.backgroundColor = this.arrayOfElements[0].bg ? this.arrayOfElements[0].bg : 'white';
@@ -129,6 +154,7 @@ export class CreateComponent implements OnInit {
         default:
           this.arrayOfElements[this.currentIndex][styles.key] = 0;
       }
+      console.log(this.arrayOfElements);
     }
   }
 
@@ -148,7 +174,13 @@ export class CreateComponent implements OnInit {
   }
 
   shareTemplate() {
-    domtoimage.toPng(this.canvas.nativeElement, {quality: 0.99})
+    let config = {
+      quality: 0.99,
+      width: 500,
+      height: 500
+    }
+
+    domtoimage.toPng(this.canvas.nativeElement, config)
     .then(function (dataUrl) {
         var link = document.createElement('a');
         link.download = 'template.png';
@@ -159,50 +191,69 @@ export class CreateComponent implements OnInit {
 
   downloadDesign() {
     let thumbnailImg: any;
-    
-    domtoimage.toPng(this.canvas.nativeElement)
+    let section = document.getElementById('drag-resize-area')!;
+
+    let config = {
+      quality: 0.99,
+      width: 500,
+      height: 500
+    }
+
+
+    domtoimage.toPng(this.canvas.nativeElement, config)
     .then( async (dataUrl) => {
-        thumbnailImg = new Image();
-        thumbnailImg.src = dataUrl;
+      var link = document.createElement('a');
+      link.href = dataUrl;
 
-        let designData: Object = {
-          title: this.templateFileName,
-          content: this.arrayOfElements,
-          file_upload: new File([thumbnailImg], this.templateFileName+'.png', {type: 'image/jpeg'})
-        };
 
-        const details = {
-          type: 'option',
-          message: 'Are you done with branding?',
-          subtext: 'Make sure to include all necessary logos on your design'
+      const blob = await (await fetch(link.href)).blob(); 
+      const file = new File([blob], this.templateFileName+'.png', {type: 'image/png'});
+
+      const fd = new FormData();
+      fd.append("file_upload", file);
+      fd.append('title', this.templateFileName);
+      
+      for (let index = 0; index < this.arrayOfElements.length; index++) {    
+        console.log(this.arrayOfElements[index])
+        fd.append('content['+index+']', JSON.stringify(this.arrayOfElements[index]));
+      }
+
+      let designData = fd;
+
+      console.log(designData);
+
+      const details = {
+        type: 'option',
+        message: 'Are you done with branding?',
+        subtext: 'Make sure to include all necessary logos on your design'
+      }
+  
+      let dialogRef = this.dialog.open(ModalComponent, {
+        width: '700px',
+        data: {
+          details: details,
+          actions: [
+            {
+              id: 'yes',
+              label: 'Yes,',
+              sublabel: ' Submit',
+              color: 'white',
+              background: '#36a592'
+            }, {
+              id: 'no',
+              label: 'No',
+              color: 'black',
+              background: '#ffd1d1'
+            }
+          ]
         }
-    
-        let dialogRef = this.dialog.open(ModalComponent, {
-          width: '700px',
-          data: {
-            details: details,
-            actions: [
-              {
-                id: 'yes',
-                label: 'Yes,',
-                sublabel: ' Submit',
-                color: 'white',
-                background: '#36a592'
-              }, {
-                id: 'no',
-                label: 'No',
-                color: 'black',
-                background: '#ffd1d1'
-              }
-            ]
-          }
-        });
-    
-        dialogRef.afterClosed().subscribe( result => {
-          if(result === 'yes') {
-            this.submitDesign(designData);
-          }
-        });
+      });
+  
+      dialogRef.afterClosed().subscribe( result => {
+        if(result === 'yes') {
+          this.submitDesign(designData);
+        }
+      });
     });
   }
 
@@ -228,5 +279,14 @@ export class CreateComponent implements OnInit {
         }
       });
     });
+  }
+
+  preloaderFn(value: boolean) {
+    this.preloaderStatus = value;
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

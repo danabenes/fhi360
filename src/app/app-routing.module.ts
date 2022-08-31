@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'create',
     component: CreateComponent
   },
+  {
+    path: 'create/:category/:id',
+    component: CreateComponent
+  },
   { 
     path: '', 
     redirectTo: 'login', 

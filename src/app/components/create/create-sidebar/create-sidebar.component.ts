@@ -1,10 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { faFileCode, faCloudUploadAlt, faFont, faSearch, faImages } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 
 import elementsData from 'src/app/data/elements.json';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/modal/modal.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-sidebar',
@@ -12,7 +14,8 @@ import { ModalComponent } from '../../shared/modal/modal.component';
   styleUrls: ['./create-sidebar.component.scss']
 })
 
-export class CreateSidebarComponent implements OnInit {
+export class CreateSidebarComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe = new Subject();
 
   faFileCode = faFileCode;
   faCloudUploadAlt = faCloudUploadAlt;
@@ -29,6 +32,7 @@ export class CreateSidebarComponent implements OnInit {
   selectedCategory: string = "background";
 
   @Output() element: EventEmitter<any> = new EventEmitter();
+  @Output() preloader: EventEmitter<any> = new EventEmitter();
   elements: any;
 
 
@@ -72,8 +76,10 @@ export class CreateSidebarComponent implements OnInit {
   }
 
   getImages() {
-    this.apiService.getApi('me/images?category='+this.selectedCategory).subscribe(res => {
+    this.preloader.emit(true);
+    this.apiService.getApi('app/images?category='+this.selectedCategory).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.currentElementList = res.body; 
+      this.preloader.emit(false);
     });
   }
 
@@ -92,6 +98,7 @@ export class CreateSidebarComponent implements OnInit {
     const fd = new FormData();
     fd.append('file_upload', this.selectedImage, this.selectedFileName);
     fd.append('title', this.selectedFileName);
+    console.log(fd)
     this.apiService.postApi('me/images', fd).subscribe(res=> {
       const details = {
         type: 'prompt',
@@ -106,6 +113,11 @@ export class CreateSidebarComponent implements OnInit {
         }
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

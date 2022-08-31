@@ -1,5 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalComponent } from '../shared/modal/modal.component';
 
@@ -8,7 +11,8 @@ import { ModalComponent } from '../shared/modal/modal.component';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit, AfterViewInit {
+export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  private ngUnsubscribe = new Subject();
 
   templateList: any;
   designList: any;
@@ -21,18 +25,32 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   designDisplay: boolean = false;
   templateDisplay: boolean = true;
 
+  preloaderStatus: boolean = false;
+
 
   constructor(
     public dialog: MatDialog,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.preloaderStatus = true;
+    this.getRecentTemplates();
   }
 
   ngAfterViewInit(): void {
-    this.getRecentDesigns();
-    this.getRecentTemplates();
+  }
+
+  getRecentTemplates() {
+    this.apiService.getApi('app/templates').pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+      if(res.status === 200) {
+        this.templateTotalPage = res.headers.get('x-pagination-page-count');
+        this.templateList = res.body;
+        this.templateDisplay = this.templateList.length ? true: false;
+        this.getRecentDesigns();
+      }
+    });
   }
 
   getRecentDesigns() {
@@ -41,36 +59,28 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
         this.designTotalPage = res.headers.get('x-pagination-page-count');
         this.designList = res.body;
         this.designDisplay = this.designList.length ? true : false;
+        this.preloaderStatus = false;
       }
     });
   }
 
-  getRecentTemplates() {
-    this.apiService.getApi('app/templates').subscribe(res => {
-      if(res.status === 200) {
-        this.templateTotalPage = res.headers.get('x-pagination-page-count');
-        this.templateList = res.body;
-        this.templateDisplay = this.templateList.length ? true: false;
-      }
-    });
-  }
-
-  handleRecentDesign(details: any, type: string) {
+  handleRecentDesign(details: any, type: string, category: string) {
     details.type = type;
-    this.dialog.open(ModalComponent, {
+    
+    let dialogRef = this.dialog.open(ModalComponent, {
       width: '700px',
       data: {
         details: details,
         actions: [{
-          id: 'edt',
-          label: 'Edit'
-        }, {
-          id: 'cpy',
-          label: 'Make a copy'
-        }, {
-          id: 'shr',
-          label: 'Share this design'
+          id: 'use',
+          label: 'Use '+ category
         }]
+      }
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
+      if(res === 'use') {
+        this.router.navigate(['create/'+category+'/'+details.id])
       }
     });
   }
@@ -83,6 +93,11 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
       this.templateCurrentPage = value;
       this.getRecentTemplates();
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

@@ -42,7 +42,7 @@
                     </div>
                     <div class="selected-list">
                         <div class="tile" *ngFor="let template of currentElementList" (click)="addElement('template', template)">
-                            <img src={{template.thumbnail}}  onerror="this.onerror=null; this.src='assets/images/template_placeholder.png'"/>
+                            <img src={{template.url}}  onerror="this.onerror=null; this.src='assets/images/template_placeholder.png'"/>
                         </div>
                     </div>
                 </div>
