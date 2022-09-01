@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -40,6 +41,7 @@ import { ApiService } from './services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PaginationComponent } from './components/shared/pagination/pagination.component';
+import { PreloaderComponent } from './components/shared/preloader/preloader.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { PaginationComponent } from './components/shared/pagination/pagination.c
     CreateHeaderComponent,
     CreateSidebarComponent,
     RichTextToolbarComponent,
-    PaginationComponent
+    PaginationComponent,
+    PreloaderComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { PaginationComponent } from './components/shared/pagination/pagination.c
     ReactiveFormsModule,
     MatTooltipModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

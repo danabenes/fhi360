@@ -1,3 +1,4 @@
+<app-preloader [handlePreloader]="preloaderStatus"></app-preloader>
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <div class="content-wrapper">
@@ -9,14 +10,14 @@
                 <div *ngIf="forApprovalListDisplay">
                     <div class="project-container">
                         <div class="list">
-                            <div *ngFor="let project of forApprovalList"><app-tile [data]="project"></app-tile></div>
+                            <div *ngFor="let project of forApprovalList" (click)="useDesign(project)"><app-tile [data]="project"></app-tile></div>
                         </div>
                     </div>
                     <app-pagination class="pagination" [totalPage]="forApprovalTotalPage" [currentPage]="forApprovalCurrentPage" (newPage)="pagination('forApproval', $event)"></app-pagination>
                 </div>
                 <div class="placeholder" *ngIf="!forApprovalListDisplay">No data to display</div>
             </mat-tab>
-            <mat-tab label="Approved">
+            <mat-tab label="Approved" (click)="getApprovedProjects()">
                 <div *ngIf="approvedListDisplay">
                     <div class="project-container">
                         <div class="list">
@@ -27,7 +28,7 @@
                 </div>
                 <div class="placeholder" *ngIf="!approvedListDisplay">No data to display</div>
             </mat-tab>
-            <mat-tab label="Rejected">
+            <mat-tab label="Rejected" (click)="getRejectedProjects()">
                 <div *ngIf="rejectedListDisplay">
                     <div class="project-container">
                         <div class="list">

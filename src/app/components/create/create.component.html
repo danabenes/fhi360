@@ -1,5 +1,6 @@
+<app-preloader [handlePreloader]="preloaderStatus"></app-preloader>
 <app-create-header (fileName)="getFileName($event)" (share)="shareTemplate()" (download)="downloadDesign()" (create)="createNewDesign()"></app-create-header>
-<app-create-sidebar (element)="addElement($event)"></app-create-sidebar>
+<app-create-sidebar (element)="addElement($event)" (preloader)="preloaderFn($event)"></app-create-sidebar>
 <div class="container">
     <div class="content" (click)="clickedOutside($event)">
         <div class="toolbar-container">

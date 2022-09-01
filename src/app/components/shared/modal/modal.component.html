@@ -3,13 +3,13 @@
         <div class="modal-content">
             <div class="flex">
                 <div class="overview">
-                    <div style="background-color: {{data.details.bgColor}}"></div>
+                    <div class="thumbnail" style="background-image: url({{data.details.url}})"></div>
                 </div>
                 <div class="details">
                     <h2>{{data.details.title}}</h2>
                     <p>{{data.details.category}}</p>
                     <div class="actions">
-                        <div *ngFor="let action of data.actions" class="btn">{{action.label}}</div>
+                        <div *ngFor="let action of data.actions" class="btn" (click)="handleDialog(action.id)">{{action.label}}</div>
                     </div>
                 </div>
             </div>

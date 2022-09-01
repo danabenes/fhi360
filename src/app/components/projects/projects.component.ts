@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe = new Subject();
 
   forApprovalList:any;
   approvedList:any;
@@ -24,48 +30,70 @@ export class ProjectsComponent implements OnInit {
   approvedListDisplay: boolean = false;
   rejectedListDisplay: boolean = false;
 
+  preloaderStatus: boolean = false;
+
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.preloaderStatus = true;
     this.getUserForApprovalProjects();
-    this.getApprovedProjects();
-    this.getRejectedProjects();
   }
 
   getUserForApprovalProjects() {
-    this.apiService.getApi('me/projects?status=forapproval&page='+this.forApprovalCurrentPage).subscribe(res => {
+    this.apiService.getApi('me/projects?status=forapproval&page='+this.forApprovalCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status === 200) {
         this.forApprovalTotalPage = res.headers.get('x-pagination-page-count');
         this.forApprovalList = res.body;
         this.forApprovalListDisplay = this.forApprovalList.length ? true : false;
-      } else {
-        this.forApprovalListDisplay = false;
+        this.preloaderStatus = false;
       }
     });
   }
 
   getApprovedProjects() {
-    this.apiService.getApi('me/projects?status=approved&page='+this.approvedCurrentPage).subscribe(res => {
+    this.preloaderStatus = true;
+    this.apiService.getApi('me/projects?status=approved&page='+this.approvedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status == 200) {
         this.approvedTotalPage = res.headers.get('x-pagination-page-count');
         this.approvedList = res.body;
         this.approvedListDisplay = this.approvedList.length ? true : false;
-      } else {
-        this.approvedListDisplay = false;
+        this.preloaderStatus = false;
       }
     });
   }
 
   getRejectedProjects() {
-    this.apiService.getApi('me/projects?status=rejected&page='+this.rejectedCurrentPage).subscribe(res => {
+    this.preloaderStatus = true;
+    this.apiService.getApi('me/projects?status=rejected&page='+this.rejectedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status == 200) {
         this.rejectedTotalPage = res.headers.get('x-pagination-page-count');
         this.rejectedList = res.body;
         this.rejectedListDisplay = this.rejectedList.length ? true : false;
-      } else {
-        this.rejectedListDisplay = false;
+        this.preloaderStatus = false;
+      }
+    });
+  }
+
+  useDesign(details: any) {
+    details.type = 'withContent';
+    let dialogRef = this.dialog.open(ModalComponent, {
+      width: '700px',
+      data: {
+        details: details,
+        actions: [{
+          id: 'use',
+          label: 'Use Design'
+        }]
+      }
+    });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
+      if(res === 'use') {
+        this.router.navigate(['create/design/'+details.id])
       }
     });
   }
@@ -81,6 +109,11 @@ export class ProjectsComponent implements OnInit {
       this.rejectedCurrentPage = value; 
       this.getRejectedProjects();
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

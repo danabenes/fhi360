@@ -1,0 +1,14 @@
+.overlay {
+    position: relative;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #00b4c1;
+} 
