@@ -40,10 +40,20 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.preloaderStatus = true;
-    this.getUserForApprovalProjects();
+    this.getForApprovalProjects();
   }
 
-  getUserForApprovalProjects() {
+  handleTabChange(value:any) {
+    if(value.index === 0) {
+      this.getForApprovalProjects();
+    } else if (value.index === 1) {
+      this.getApprovedProjects();
+    } else {
+      this.getRejectedProjects();
+    }
+  }
+
+  getForApprovalProjects() {
     this.apiService.getApi('me/projects?status=forapproval&page='+this.forApprovalCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status === 200) {
         this.forApprovalTotalPage = res.headers.get('x-pagination-page-count');
@@ -56,7 +66,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   getApprovedProjects() {
     this.preloaderStatus = true;
-    this.apiService.getApi('me/projects?status=approved&page='+this.approvedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+    this.apiService.getApi('me/projects?status=active&page='+this.approvedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status == 200) {
         this.approvedTotalPage = res.headers.get('x-pagination-page-count');
         this.approvedList = res.body;
@@ -68,7 +78,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   getRejectedProjects() {
     this.preloaderStatus = true;
-    this.apiService.getApi('me/projects?status=rejected&page='+this.rejectedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+    this.apiService.getApi('me/projects?status=reject&page='+this.rejectedCurrentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       if(res.status == 200) {
         this.rejectedTotalPage = res.headers.get('x-pagination-page-count');
         this.rejectedList = res.body;
@@ -101,7 +111,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   pagination(section: string, value: any) {
     if(section === 'forApproval') {
       this.forApprovalCurrentPage = value;
-      this.getUserForApprovalProjects();
+      this.getForApprovalProjects();
     } else if(section === 'approved') {
       this.approvedCurrentPage = value;
       this.getApprovedProjects();

@@ -5,8 +5,8 @@
     <div class="section-container">
         <h2>Projects</h2>
 
-        <mat-tab-group animationDuration="0ms">
-            <mat-tab label="For Approval">
+        <mat-tab-group animationDuration="0ms" (selectedTabChange)="handleTabChange($event)">
+            <mat-tab label="For Approval" (selectedTabChange)="getForApprovalProjects()">
                 <div *ngIf="forApprovalListDisplay">
                     <div class="project-container">
                         <div class="list">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="placeholder" *ngIf="!forApprovalListDisplay">No data to display</div>
             </mat-tab>
-            <mat-tab label="Approved" (click)="getApprovedProjects()">
+            <mat-tab label="Approved" (selectedTabChange)="getApprovedProjects()">
                 <div *ngIf="approvedListDisplay">
                     <div class="project-container">
                         <div class="list">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="placeholder" *ngIf="!approvedListDisplay">No data to display</div>
             </mat-tab>
-            <mat-tab label="Rejected" (click)="getRejectedProjects()">
+            <mat-tab label="Rejected" (selectedTabChange)="getRejectedProjects()">
                 <div *ngIf="rejectedListDisplay">
                     <div class="project-container">
                         <div class="list">

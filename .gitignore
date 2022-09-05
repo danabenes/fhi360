@@ -6,3 +6,6 @@ node_modules
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
 .vscode/
+
+# File
+/index.html

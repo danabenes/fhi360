@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faBold, faItalic, faTrashAlt, faMinus, faPlus, faEyeDropper, faObjectGroup } from '@fortawesome/free-solid-svg-icons';
+import { faBold, faItalic, faTrashAlt, faMinus, faPlus, faEyeDropper, faObjectGroup, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -19,6 +19,10 @@ export class RichTextToolbarComponent implements OnInit {
   faPlus = faPlus;
   faEyeDropper = faEyeDropper;
   faObjectGroup = faObjectGroup;
+  faAlignLeft = faAlignLeft;
+  faAlignCenter = faAlignCenter ;
+  faAlignRight = faAlignRight;
+  faAlignJustify = faAlignJustify;
   
   styleElement:any = {};
   bgColor: any = 'black';

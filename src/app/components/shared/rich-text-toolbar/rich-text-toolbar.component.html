@@ -37,6 +37,24 @@
         (colorPickerChange)="onColorChange('text', textColor)">
         <fa-icon [icon]="faEyeDropper"></fa-icon>
     </div>
+    <div class="text-positions">
+        <!-- text align left -->
+        <div class="text-left" (click)="setStyle('textPosition','left')" matTooltip="Align Left">
+            <fa-icon [icon]="faAlignLeft"></fa-icon>
+        </div>
+        <!-- text align center -->
+        <div class="text-center" (click)="setStyle('textPosition','center')" matTooltip="Align Center">
+            <fa-icon [icon]="faAlignCenter"></fa-icon>
+        </div>
+        <!-- text align right -->
+        <div class="text-right" (click)="setStyle('textPosition','right')" matTooltip="Align Right">
+            <fa-icon [icon]="faAlignRight"></fa-icon>
+        </div>
+        <!-- text align justify -->
+        <div class="text-right" (click)="setStyle('textPosition','justify')" matTooltip="Justify">
+            <fa-icon [icon]="faAlignJustify"></fa-icon>
+        </div>
+    </div>
     <!-- bold -->
     <div class="font-bold" (click)="setStyle('fontWeight','bold')" matTooltip="Bold">
         <fa-icon [icon]="faBold"></fa-icon>

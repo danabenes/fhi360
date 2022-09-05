@@ -140,13 +140,13 @@ export class CreateComponent implements OnInit, OnDestroy {
     if(styles.key === 'z-index') {
       switch(styles.value) {
         case 'back':
-          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition - 1
+          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition -= 1
         break;
         case 'base':
           this.arrayOfElements[this.currentIndex][styles.key] = -999;
         break;
         case 'forward':
-          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition + 1;
+          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition += 1;
         break;
         case 'front':
           this.arrayOfElements[this.currentIndex][styles.key] = 999;
