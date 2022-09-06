@@ -38,10 +38,6 @@ export class ApiService {
         return this.http.post(this.baseUrl + endpoint, data, { headers:this.headers });
     }
 
-    patchApi(endpoint: string, params: string) {
-        console.log(endpoint, params);
-    }
-
     postNoHeaders(endpoint: string, data : any) {
         return this.http.post(this.baseUrl + endpoint, data);
     }

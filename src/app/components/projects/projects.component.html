@@ -32,7 +32,7 @@
                 <div *ngIf="rejectedListDisplay">
                     <div class="project-container">
                         <div class="list">
-                            <div *ngFor="let project of rejectedList"><app-tile [data]="project"></app-tile></div>
+                            <div *ngFor="let project of rejectedList" (click)="editDesign(project)"><app-tile [data]="project"></app-tile></div>
                         </div>
                     </div>
                     <app-pagination class="pagination" [totalPage]="rejectedTotalPage" [currentPage]="rejectedCurrentPage" (newPage)="pagination('rejected', $event)"></app-pagination>

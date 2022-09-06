@@ -15,7 +15,6 @@ export class PreloaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.handlePreloader);
   }
 
 }

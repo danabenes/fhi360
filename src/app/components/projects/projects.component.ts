@@ -108,6 +108,26 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     });
   }
 
+  editDesign(details: any) {
+    details.type = 'withContent';
+    let dialogRef = this.dialog.open(ModalComponent, {
+      width: '700px',
+      data: {
+        details: details,
+        actions: [{
+          id: 'edit',
+          label: 'Edit Design'
+        }]
+      }
+  });
+
+    dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
+      if(res === 'edit') {
+        this.router.navigate(['create/design/'+details.id])
+      }
+    });
+  }
+
   pagination(section: string, value: any) {
     if(section === 'forApproval') {
       this.forApprovalCurrentPage = value;

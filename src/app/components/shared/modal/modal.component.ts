@@ -24,4 +24,12 @@ export class ModalComponent implements OnInit {
     this.dialogRef.close(type)
   }
 
+  convertDate(date:any) {
+    let newDate = date.split(' ')[0];
+    let month = newDate.split('-')[1];
+    let day = newDate.split('-')[2];
+    let year = newDate.split('-')[0];
+    return new Date(year, month, day).toLocaleDateString('en-us', { month: 'long' }) + ' ' + ' ' + day + ', ' + year;
+  }
+
 }

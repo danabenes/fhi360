@@ -8,8 +8,13 @@
                 <div class="details">
                     <h2>{{data.details.title}}</h2>
                     <p>{{data.details.category}}</p>
+                    <p class="date-submitted"><label>Date Submitted:</label> {{ convertDate(data.details.created_at) }}</p>
                     <div class="actions">
                         <div *ngFor="let action of data.actions" class="btn" (click)="handleDialog(action.id)">{{action.label}}</div>
+                    </div>
+                    <div *ngIf="data.details.status === 'reject'" class="reject_message">
+                        <span>Reason(s) for Rejection</span>
+                        <p>{{data.details.reject_message}}</p>
                     </div>
                 </div>
             </div>

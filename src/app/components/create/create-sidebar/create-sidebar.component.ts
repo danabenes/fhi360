@@ -64,7 +64,7 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   }
 
   getTemplateList() {
-    this.apiService.getApi('me/projects').subscribe(res => {
+    this.apiService.getApi('app/templates').subscribe(res => {
       this.currentElementList = res.body; 
     });
   }

@@ -71,6 +71,28 @@
                             }
                         }
                     }
+
+                    .reject_message {
+                        margin-top: 20px;
+
+                        span {
+                            font-size: 8pt;
+                            color: red;
+                            font-family: 'Montserrat-SemiBold';
+                        }
+
+                        p {
+                            font-size: 8pt;
+                        }
+                    }
+
+                    .date-submitted {
+                        font-size: 7pt;
+
+                        label {
+                            font-family: 'Montserrat-SemiBold'; 
+                        }
+                    }
                 }
             }
         }
