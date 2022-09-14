@@ -90,16 +90,31 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   useDesign(details: any) {
     details.type = 'withContent';
-    let dialogRef = this.dialog.open(ModalComponent, {
-      width: '700px',
-      data: {
-        details: details,
-        actions: [{
-          id: 'use',
-          label: 'Use Design'
-        }]
-      }
-    });
+    let dialogRef ;
+
+    if(details.status === 'approved') {
+      dialogRef = this.dialog.open(ModalComponent, {
+        width: '700px',
+        data: {
+          details: details,
+          actions: [{
+            id: 'use',
+            label: 'Use Design'
+          }]
+        }
+      });
+    } else {
+      dialogRef = this.dialog.open(ModalComponent, {
+        width: '700px',
+        data: {
+          details: details,
+          actions: [{
+            id: 'use',
+            label: 'Use Design'
+          }]
+        }
+      });
+    }
 
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
       if(res === 'use') {

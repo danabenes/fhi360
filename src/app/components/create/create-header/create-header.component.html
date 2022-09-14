@@ -31,7 +31,7 @@
                         <div></div> -->
                     </div>
                     <div mat-menu-item (click)="createNewDesign()">Create New Design</div>
-                    <div mat-menu-item>Submit for Review</div>
+                    <div mat-menu-item (click)="downloadDesign()">Submit for Review</div>
                 </mat-menu>
             </li>
         </ul>
@@ -40,6 +40,7 @@
             <div class="btn share" (click)="saveAsImage()">Share</div>
             <div class="btn download" (click)="downloadDesign()">Download</div>
             -->
+            <div class="btn share" *ngIf="isDownloadable" (click)="saveAsImage()">Download</div>
             <div class="btn download" (click)="downloadDesign()">Submit for Review</div>
         </div>
     </div>

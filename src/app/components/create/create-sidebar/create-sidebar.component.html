@@ -71,6 +71,9 @@
                         <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: image.url})"><img src={{image.url}}></div>
                     </div>
                 </div>
+
+                <app-pagination *ngIf="currentTab !== 'text'" class="pagination" [totalPage]="totalPage" [currentPage]="currentPage" (newPage)="pagination($event)"></app-pagination>
+                <!-- <app-pagination [totalPage]="totalPage" [currentPage]="currentPage" (newPage)="pagination($event)"></app-pagination> -->
             </div>
         </div>
     </div>

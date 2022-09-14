@@ -9,3 +9,7 @@ node_modules
 
 # File
 **/src/index.html
+src/index.html
+/index.html
+index.html
+dist/index.html

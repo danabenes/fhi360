@@ -22,7 +22,7 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   faFont = faFont;
   faSearch = faSearch;
   faImages = faImages;
-  currentTab : string = 'template';
+  currentTab : string = 'elements';
   currentElementList: any = [];
 
   selectedFileName: string = 'Select Image';
@@ -30,6 +30,9 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   enableUploadBtn: boolean = false;
   selectedCategory: string = "background";
+
+  totalPage : number = 1; 
+  currentPage: number = 1;
 
   @Output() element: EventEmitter<any> = new EventEmitter();
   @Output() preloader: EventEmitter<any> = new EventEmitter();
@@ -48,6 +51,7 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   showList(selected: string) {
     this.currentTab = selected;
+    this.totalPage = 1;
     if(selected === 'elements') {
       this.getImages();
     } else if (selected === 'template') {
@@ -64,21 +68,30 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   }
 
   getTemplateList() {
-    this.apiService.getApi('app/templates').subscribe(res => {
+    this.apiService.getApi('app/templates').pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.currentElementList = res.body; 
+      
+      // this.rejectedTotalPage = res.headers.get('x-pagination-page-count');
+      //   this.rejectedList = res.body;
+      //   this.rejectedListDisplay = this.rejectedList.length ? true : false;
+      //   this.preloaderStatus = false;
+
     });
   }
 
   getUploadedImageList() {
     this.apiService.getApi('me/images').subscribe(res => {
       this.currentElementList = res.body; 
+      console.log(this.currentElementList);
     });
   }
 
   getImages() {
     this.preloader.emit(true);
-    this.apiService.getApi('app/images?category='+this.selectedCategory).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
+    this.apiService.getApi('app/images?category='+this.selectedCategory+'&page=' + this.currentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.currentElementList = res.body; 
+      this.totalPage = res.headers.get('x-pagination-page-count');
+      console.log(res.headers.get('x-pagination-page-count'));
       this.preloader.emit(false);
     });
   }
@@ -98,7 +111,6 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
     const fd = new FormData();
     fd.append('file_upload', this.selectedImage, this.selectedFileName);
     fd.append('title', this.selectedFileName);
-    console.log(fd)
     this.apiService.postApi('me/images', fd).subscribe(res=> {
       const details = {
         type: 'prompt',
@@ -113,6 +125,19 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  pagination(value : any) {
+    if(this.currentTab === 'elements') {
+      this.currentTab = value;
+      this.getImages();
+    } else if (this.currentTab === 'template') {
+      this.currentTab = value;
+      this.getTemplateList();
+    } else if (this.currentTab === 'upload') {
+      this.currentTab = value;
+      this.getUploadedImageList();
+    }
   }
 
   ngOnDestroy() {

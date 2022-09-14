@@ -21,7 +21,7 @@
                 <div *ngIf="approvedListDisplay">
                     <div class="project-container">
                         <div class="list">
-                            <div *ngFor="let project of approvedList"><app-tile [data]="project"></app-tile></div>
+                            <div *ngFor="let project of approvedList" (click)="useDesign(project)"><app-tile [data]="project"></app-tile></div>
                         </div>
                     </div>
                     <app-pagination class="pagination" [totalPage]="approvedTotalPage" [currentPage]="approvedCurrentPage" (newPage)="pagination('approved', $event)"></app-pagination>

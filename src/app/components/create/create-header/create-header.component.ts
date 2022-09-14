@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { faAngleLeft, faPen } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,6 +15,8 @@ export class CreateHeaderComponent implements OnInit {
 
   templateForm: any ;
   templateFileName:string = "Untitled Design";
+
+  @Input() isDownloadable: boolean = false;
 
   @Output() share: EventEmitter<any> = new EventEmitter();
   @Output() download: EventEmitter<any> = new EventEmitter();

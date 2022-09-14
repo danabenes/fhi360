@@ -37,6 +37,8 @@ export class CreateComponent implements OnInit, OnDestroy {
   isTemplate: boolean = false;
   templateFileName: string = 'UntitledDesign';
 
+  designStatus: string = 'forapproval';
+
   preloaderStatus: boolean = false;                                                                        
 
   constructor(
@@ -64,6 +66,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     }
 
     this.apiService.getApi(url).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => {
+      this.designStatus = res['body'].find((data: { id: any; }) => data.id === id).status;
       this.createTemplate(res['body'].find((data: { id: any; }) => data.id === id).content);
     })
   }
@@ -154,7 +157,6 @@ export class CreateComponent implements OnInit, OnDestroy {
         default:
           this.arrayOfElements[this.currentIndex][styles.key] = 0;
       }
-      console.log(this.arrayOfElements);
     }
   }
 
@@ -214,13 +216,10 @@ export class CreateComponent implements OnInit, OnDestroy {
       fd.append('title', this.templateFileName);
       
       for (let index = 0; index < this.arrayOfElements.length; index++) {    
-        console.log(this.arrayOfElements[index])
         fd.append('content['+index+']', JSON.stringify(this.arrayOfElements[index]));
       }
 
       let designData = fd;
-
-      console.log(designData);
 
       const details = {
         type: 'option',
