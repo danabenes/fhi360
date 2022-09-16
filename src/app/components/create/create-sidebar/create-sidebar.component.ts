@@ -129,13 +129,13 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   pagination(value : any) {
     if(this.currentTab === 'elements') {
-      this.currentTab = value;
+      this.currentPage = value;
       this.getImages();
     } else if (this.currentTab === 'template') {
-      this.currentTab = value;
+      this.currentPage = value;
       this.getTemplateList();
     } else if (this.currentTab === 'upload') {
-      this.currentTab = value;
+      this.currentPage = value;
       this.getUploadedImageList();
     }
   }

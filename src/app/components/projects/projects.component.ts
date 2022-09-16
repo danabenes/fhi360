@@ -92,7 +92,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     details.type = 'withContent';
     let dialogRef ;
 
-    if(details.status === 'approved') {
+    if(details.status === 'active') {
       dialogRef = this.dialog.open(ModalComponent, {
         width: '700px',
         data: {
@@ -100,6 +100,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
           actions: [{
             id: 'use',
             label: 'Use Design'
+          },{
+            id: 'download',
+            label: 'Download Design'
           }]
         }
       });
@@ -119,6 +122,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
       if(res === 'use') {
         this.router.navigate(['create/design/'+details.id])
+      } else {
+        var link = document.createElement('a');
+        link.download = 'template.png';
+        link.href = details.url;
+        link.click();
       }
     });
   }
