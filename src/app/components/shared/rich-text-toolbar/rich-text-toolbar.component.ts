@@ -40,6 +40,12 @@ export class RichTextToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getFonts().subscribe(data => {
       this.fonts = data;
+      for (let index = 0; index < this.fonts['items'].length; index++) {
+        let link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + this.fonts['items'][index].family);
+        document.head.appendChild(link);
+      }    
     });
   }
 
