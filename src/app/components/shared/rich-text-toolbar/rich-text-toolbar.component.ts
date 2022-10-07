@@ -2,6 +2,8 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@
 import { faBold, faItalic, faTrashAlt, faMinus, faPlus, faEyeDropper, faObjectGroup, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 
+import fontList from 'src/app/data/fonts.json';
+
 @Component({
   selector: 'app-rich-text-toolbar',
   templateUrl: './rich-text-toolbar.component.html',
@@ -38,15 +40,7 @@ export class RichTextToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.apiService.getFonts().subscribe(data => {
-      this.fonts = data;
-      for (let index = 0; index < this.fonts['items'].length; index++) {
-        let link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + this.fonts['items'][index].family);
-        document.head.appendChild(link);
-      }    
-    });
+    this.fonts = fontList.fonts;
   }
 
   onColorChange(type: string, colorCode: string) {

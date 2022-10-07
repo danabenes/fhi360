@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { faFileCode, faCloudUploadAlt, faFont, faSearch, faImages } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 
-import elementsData from 'src/app/data/elements.json';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { takeUntil } from 'rxjs/operators';
@@ -45,7 +44,6 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.elements = elementsData;
     this.showList(this.currentTab);
   }
 

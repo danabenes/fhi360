@@ -15,8 +15,8 @@
     <div class="font-style">
         <mat-select (selectionChange)="onFontSelect('fontFace', $event)" [(value)]="selectedOption">
             <mat-option [value]="'default'" aria-disabled="true">Select Font</mat-option>
-            <mat-option *ngFor="let fontFace of fonts['items']" [value]="fontFace['family']">
-                <span [style.font-family]="fontFace['family']">{{fontFace['family']}}</span>
+            <mat-option *ngFor="let fontFace of fonts" [value]="fontFace">
+                <span [style.font-family]="fontFace">{{fontFace}}</span>
             </mat-option>
         </mat-select>
     </div>
