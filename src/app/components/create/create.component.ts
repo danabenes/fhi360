@@ -54,6 +54,8 @@ export class CreateComponent implements OnInit, OnDestroy {
         this.getTemplateDetails(res.get('category'), res.get('id'));
       }
     });
+    // Sample Data:
+    // this.arrayOfElements = [{type: 'background', bg: 'white'}, {type: 'element', url:"http://54.251.31.63/welcome/uploads/images/1661824838_630d6f4682dd4.png"}]
     this.arrayOfElements.push({type: 'background', bg: 'white'});
   }
 
@@ -94,6 +96,8 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.currentIndex = indexOfLatestElem;
       this.defaultFontSize = data.fontSize ? data.fontSize.substring(0,2) : 12;
     }
+
+    console.log(this.arrayOfElements);
   }
 
   createTemplate(elements: any) {
@@ -130,34 +134,37 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   setElementStyle(styles: any) {
-    if(this.arrayOfElements[this.currentIndex].hasOwnProperty(styles.key) && this.arrayOfElements[this.currentIndex][styles.key] === styles.value && styles.key !== 'z-index') {
-      delete this.arrayOfElements[this.currentIndex][styles.key];
-    } else {
-      this.arrayOfElements[this.currentIndex][styles.key] = styles.value;
-    }
+    if(this.arrayOfElements[this.currentIndex]) {
+      if(this.arrayOfElements[this.currentIndex].hasOwnProperty(styles.key) && this.arrayOfElements[this.currentIndex][styles.key] === styles.value && styles.key !== 'z-index') {
+        delete this.arrayOfElements[this.currentIndex][styles.key];
+      } else {
+        this.arrayOfElements[this.currentIndex][styles.key] = styles.value;
+      }
 
-    if(styles.key === 'bg' && this.currentIndex === 0) {
-      this.backgroundColor = styles.value;
-    }
-
-    if(styles.key === 'z-index') {
-      switch(styles.value) {
-        case 'back':
-          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition -= 1
-        break;
-        case 'base':
-          this.arrayOfElements[this.currentIndex][styles.key] = -999;
-        break;
-        case 'forward':
-          this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition += 1;
-        break;
-        case 'front':
-          this.arrayOfElements[this.currentIndex][styles.key] = 999;
-        break;
-        default:
-          this.arrayOfElements[this.currentIndex][styles.key] = 0;
+      if(styles.key === 'bg' && this.currentIndex === 0) {
+        this.backgroundColor = styles.value;
+      }
+  
+      if(styles.key === 'z-index') {
+        switch(styles.value) {
+          case 'back':
+            this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition -= 1
+          break;
+          case 'base':
+            this.arrayOfElements[this.currentIndex][styles.key] = -999;
+          break;
+          case 'forward':
+            this.arrayOfElements[this.currentIndex][styles.key] = this.defaultPosition += 1;
+          break;
+          case 'front':
+            this.arrayOfElements[this.currentIndex][styles.key] = 999;
+          break;
+          default:
+            this.arrayOfElements[this.currentIndex][styles.key] = 0;
+        }
       }
     }
+    return
   }
 
   deleteItem() {

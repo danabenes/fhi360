@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 @Injectable()
 export class ApiService {
@@ -16,19 +18,20 @@ export class ApiService {
     );
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private router: Router
     ) {
         this.headers = this.headers.append('Authorization', "Bearer " + localStorage.getItem('token'));
-    }
-
-    getFonts() {
-        return this.http.get(this.fontsUrl);
     }
 
     getApi(endpoint: string) {
         return this.http.get(this.baseUrl + endpoint, {observe: 'response', 'headers': this.headers}).pipe(
             map((resp: any) => {
-               return resp;
+                return resp;
+            }),
+            catchError((err) => {
+                this.router.navigate(['login']);
+                return throwError(err)
             })
         );
         // return this.http.get(this.baseUrl + endpoint, { 'headers': this.headers });

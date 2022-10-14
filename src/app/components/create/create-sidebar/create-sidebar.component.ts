@@ -7,6 +7,8 @@ import { ModalComponent } from '../../shared/modal/modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-create-sidebar',
   templateUrl: './create-sidebar.component.html',
@@ -24,6 +26,8 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   currentTab : string = 'elements';
   currentElementList: any = [];
 
+  elementsCategory = ['background', 'bacteria', 'bodyparts', 'call to action', 'food', 'logo', 'meds', 'others', 'people', 'people 2', 'people 3', 'shapes'];
+
   selectedFileName: string = 'Select Image';
   selectedImage: any;
 
@@ -40,7 +44,8 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiService: ApiService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +65,8 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   }
 
   selectCategory(key:string) {
-    this.currentElementList = this.elements[key];
+    console.log(key);
+    this.currentElementList = key;
     this.selectedCategory = key;
     this.getImages();
   }
@@ -89,7 +95,6 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
     this.apiService.getApi('app/images?category='+this.selectedCategory+'&page=' + this.currentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
       this.currentElementList = res.body; 
       this.totalPage = res.headers.get('x-pagination-page-count');
-      console.log(res.headers.get('x-pagination-page-count'));
       this.preloader.emit(false);
     });
   }

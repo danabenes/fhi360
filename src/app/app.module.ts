@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -42,6 +43,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PaginationComponent } from './components/shared/pagination/pagination.component';
 import { PreloaderComponent } from './components/shared/preloader/preloader.component';
+
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import { PreloaderComponent } from './components/shared/preloader/preloader.comp
     MatTooltipModule,
     MatMenuModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

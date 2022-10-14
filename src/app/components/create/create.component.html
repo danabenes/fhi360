@@ -20,7 +20,8 @@
                     <div class="wrapper">
                         <div class="element-container"
                             (click)="selectElement(indexOfelement + 1)"
-                            [ngClass]="{isActive: currentIndex === indexOfelement + 1, isTextArea: element.type === 'textbox'}">
+                            [ngClass]="{isActive: currentIndex === indexOfelement + 1, isTextArea: element.type === 'textbox'}"
+                            [style.transform]="element.rotate">
     
                             <!-- START TEXTAREA -->
                             <textarea *ngIf="element.type === 'textbox'"
@@ -33,6 +34,7 @@
                                 [style.width]="element.width"
                                 [style.height]="element.height"
                                 [style.text-align]="element.textPosition"
+                                [style.opacity]="element.opacity"
                                 matInput
                                 cdkTextareaAutosize
                                 autofocus
@@ -47,6 +49,7 @@
                                 [ngClass]="{isActive: currentIndex === indexOfelement + 1}"
                                 [style.width]="element.width"
                                 [style.height]="element.height"
+                                [style.opacity]="element.opacity"
                                 id="elementImageWrapper{{indexOfelement+1}}">
                                 <img src="{{element.url}}">
                             </div>

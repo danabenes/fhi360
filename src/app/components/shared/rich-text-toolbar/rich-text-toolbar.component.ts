@@ -32,6 +32,8 @@ export class RichTextToolbarComponent implements OnInit {
   fonts: any = [];
   hideSelectLabel: boolean = false;
   selectedOption = "default";
+  selectOpacity: boolean = false;
+  rotateSlider: boolean = false;
 
   @Input() fontSize: any = 12;
 
@@ -79,6 +81,26 @@ export class RichTextToolbarComponent implements OnInit {
     }
 
     this.setStyle('fontSize', this.fontSize.toString()+'px');
+  }
+
+  showOpacitySlider() {
+    this.selectOpacity = !this.selectOpacity;
+  }
+
+  showRotateSlider() {
+    this.rotateSlider = !this.rotateSlider;
+  }
+
+  onSliderChange(e: any, element: string) {
+    if(element === 'opacity') {
+      if(e.value === 100) {
+        this.setStyle('opacity', '100');
+      } else {
+        this.setStyle('opacity', '0.' + e.value);
+      }
+    } else {
+      this.setStyle('rotate', 'rotate('+ e.value +'deg)');
+    }
   }
 
 }
