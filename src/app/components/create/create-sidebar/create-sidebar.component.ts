@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { faFileCode, faCloudUploadAlt, faFont, faSearch, faImages } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -26,12 +26,54 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   currentTab : string = 'elements';
   currentElementList: any = [];
 
-  elementsCategory = ['background', 'bacteria', 'bodyparts', 'call to action', 'food', 'logo', 'meds', 'others', 'people', 'people 2', 'people 3', 'shapes'];
+  elementsCategory = [
+    {
+      id: 'background',
+      name: 'background'
+    }, {
+      id: 'bacteria',
+      name: 'bacteria'
+    },{
+      id: 'bodyparts',
+      name: 'body parts'
+    },{
+      id: 'calltoaction',
+      name: 'call to action'
+    },{
+      id: 'food',
+      name: 'food'
+    },{
+      id: 'logo',
+      name: 'logo'
+    },{
+      id: 'meds',
+      name: 'medicine'
+    },{
+      id: 'others',
+      name: 'others'
+    },{
+      id: 'people',
+      name: 'people'
+    },{
+      id: 'people2',
+      name: 'people 2'
+    },{
+      id: 'people3',
+      name: 'people 3'
+    },{
+      id: 'shapes',
+      name: 'shapes'
+    },{
+      id: 'tech',
+      name: 'technology'
+    }
+  ];
 
   selectedFileName: string = 'Select Image';
   selectedImage: any;
 
   enableUploadBtn: boolean = false;
+  maxSize: boolean = false;
   selectedCategory: string = "background";
 
   totalPage : number = 1; 
@@ -39,6 +81,9 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
 
   @Output() element: EventEmitter<any> = new EventEmitter();
   @Output() preloader: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('fileInput')fileInput!: ElementRef;
+
   elements: any;
 
 
@@ -93,7 +138,9 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   getImages() {
     this.preloader.emit(true);
     this.apiService.getApi('app/images?category='+this.selectedCategory+'&page=' + this.currentPage).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-      this.currentElementList = res.body; 
+      console.log(res);
+      let imageList = res.body;
+      this.currentElementList = imageList; 
       this.totalPage = res.headers.get('x-pagination-page-count');
       this.preloader.emit(false);
     });
@@ -111,23 +158,33 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   }
 
   uploadImage() {
-    const fd = new FormData();
-    fd.append('file_upload', this.selectedImage, this.selectedFileName);
-    fd.append('title', this.selectedFileName);
-    this.apiService.postApi('me/images', fd).subscribe(res=> {
-      const details = {
-        type: 'prompt',
-        message: 'Image Uploaded!'
-      }
+    // Validate image size
+    const fileSize = this.fileInput.nativeElement.size;
+    const fileMb = fileSize / 1024 ** 2;
+
+    if(fileMb >= 2) {
+      this.maxSize = !this.maxSize;
+    }
+
+    console.log(fileMb);
+
+    // const fd = new FormData();
+    // fd.append('file_upload', this.selectedImage, this.selectedFileName);
+    // fd.append('title', this.selectedFileName);
+    // this.apiService.postApi('me/images', fd).subscribe(res=> {
+    //   const details = {
+    //     type: 'prompt',
+    //     message: 'Image Uploaded!'
+    //   }
   
-      this.dialog.open(ModalComponent, {
-        width: '500px',
-        data: {
-          details: details,
-          actions: []
-        }
-      });
-    });
+    //   this.dialog.open(ModalComponent, {
+    //     width: '500px',
+    //     data: {
+    //       details: details,
+    //       actions: []
+    //     }
+    //   });
+    // });
   }
 
   pagination(value : any) {

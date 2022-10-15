@@ -50,12 +50,13 @@
                 <!-- UPLOAD -->
                 <div class="uploaded-images" *ngIf="currentTab === 'upload'">
                     <div class="upload-form">
-                        <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" id="select-image" (change)="selectImage($event)" />
+                        <input #fileInput type="file" accept="image/png, image/gif, image/jpeg, image/jpg" id="select-image" (change)="selectImage($event)" />
                         <div class="form-display">
                             <label class="select-image" for="select-image"
                                 [ngClass]="{hasImage: selectedFileName !== 'Select Image'}"><span>{{selectedFileName}}</span></label>
                                 <button [ngClass]="{isEnabled: enableUploadBtn}" (click)="uploadImage()">Upload</button>
                         </div>
+                        <span class="errorMessage" *ngIf="maxSize">File size exceeds maximum limit. Maximum allowed file is 2MB.</span>
                     </div>
                     <div class="uploaded-images">
                         <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: image.url})"><img src={{image.url}}></div>
@@ -65,7 +66,7 @@
                 <!-- ELEMENTS -->
                 <div class="element-category" *ngIf="currentTab === 'elements'">
                     <mat-select [(value)]="selectedCategory" (selectionChange)="selectCategory(selectedCategory)">
-                        <mat-option *ngFor="let category of elementsCategory" [value]="category" class="capitalize">{{category}}</mat-option>
+                        <mat-option *ngFor="let category of elementsCategory" [value]="category.id" class="capitalize">{{category.name}}</mat-option>
                     </mat-select>
                     <div class="element-list">
                         <div *ngFor="let image of currentElementList" (click)="addElement('element', {type: 'element', url: image.url})"><img src={{image.url}}></div>
