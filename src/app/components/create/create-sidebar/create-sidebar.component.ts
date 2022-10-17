@@ -110,7 +110,6 @@ export class CreateSidebarComponent implements OnInit, OnDestroy {
   }
 
   selectCategory(key:string) {
-    console.log(key);
     this.currentElementList = key;
     this.selectedCategory = key;
     this.getImages();
