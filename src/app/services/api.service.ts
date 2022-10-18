@@ -28,10 +28,6 @@ export class ApiService {
         return this.http.get(this.baseUrl + endpoint, {observe: 'response', 'headers': this.headers}).pipe(
             map((resp: any) => {
                 return resp;
-            }),
-            catchError((err) => {
-                this.router.navigate(['login']);
-                return throwError(err)
             })
         );
         // return this.http.get(this.baseUrl + endpoint, { 'headers': this.headers });
