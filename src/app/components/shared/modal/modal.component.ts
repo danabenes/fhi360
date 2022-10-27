@@ -24,6 +24,17 @@ export class ModalComponent implements OnInit {
     this.dialogRef.close(type)
   }
 
+  share(platform: string) {
+    let image = this.data.details['url'];
+    if(platform === "fb") {
+      window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(image),'sharer','toolbar=0,status=0,width=500,height=500');
+      return false;
+    } else {
+      window.open ('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(image)); 
+      return false;
+    }
+  }
+
   convertDate(date:any) {
     let newDate = date.split(' ')[0];
     let month = newDate.split('-')[1];

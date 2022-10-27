@@ -16,6 +16,13 @@
                         <span>Reason(s) for Rejection</span>
                         <p>{{data.details.reject_message}}</p>
                     </div>
+                    <div class="socials-container" *ngIf="data.details.status === 'active'">
+                        <p>Share:</p>
+                        <ul>
+                            <li (click)="share('fb')"><img src="/assets/images/icons/fb.png"></li>
+                            <li (click)="share('linkedin')"><img src="/assets/images/icons/in.png"></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

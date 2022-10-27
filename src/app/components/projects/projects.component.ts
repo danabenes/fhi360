@@ -120,13 +120,15 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     }
 
     dialogRef.afterClosed().pipe(takeUntil(this.ngUnsubscribe)).subscribe( res => {
-      if(res === 'use') {
-        this.router.navigate(['create/design/'+details.id])
-      } else {
-        var link = document.createElement('a');
-        link.download = 'template.png';
-        link.href = details.url;
-        link.click();
+      if (res) {
+        if(res === 'use') {
+          this.router.navigate(['create/design/'+details.id])
+        } else {
+          var link = document.createElement('a');
+          link.download = 'template.png';
+          link.href = details.url;
+          link.click();
+        }
       }
     });
   }
