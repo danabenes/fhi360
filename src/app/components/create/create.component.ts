@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   bgSelected : boolean = false;
   currentIndex:any = null;
-  backgroundColor: string = 'white';
+  backgroundColor: string = 'transparent';
   elementFillColor: string = 'black';
   defaultFontSize : number = 12;
   defaultPosition: number = 0;
@@ -56,7 +56,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     });
     // Sample Data:
     // this.arrayOfElements = [{type: 'background', bg: 'white'}, {type: 'element', url:"http://54.251.31.63/welcome/uploads/images/1661824838_630d6f4682dd4.png"}]
-    this.arrayOfElements.push({type: 'background', bg: 'white'});
+    this.arrayOfElements.push({type: 'background', bg: 'transparent'});
   }
 
   getTemplateDetails(category: any, id: any) {
@@ -105,7 +105,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.arrayOfElements.push(JSON.parse(elements[index]));
     }
 
-    this.backgroundColor = this.arrayOfElements[0].bg ? this.arrayOfElements[0].bg : 'white';
+    this.backgroundColor = this.arrayOfElements[0].bg ? this.arrayOfElements[0].bg : 'transparent';
   }
 
   selectElement(index: number) {
@@ -179,7 +179,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   createNewDesign() {
     this.arrayOfElements = [];
-    this.arrayOfElements.push({type: 'background', bg: 'white'});
+    this.arrayOfElements.push({type: 'background', bg: 'transparent'});
   }
 
   shareTemplate() {

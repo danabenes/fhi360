@@ -37,6 +37,12 @@ $fhi-theme: mat.define-light-theme((
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Abril+Fatface&family=Aclonica&family=Acme&family=Aguafina+Script&family=Akaya+Kanadaka&family=Alef&family=Alex+Brush&family=Alfa+Slab+One&family=Alkalami&family=Alumni+Sans&family=Anek+Devanagari&family=Anonymous+Pro&family=Anybody&family=BIZ+UDPGothic&family=Baloo+Paaji+2&family=Baloo+Tammudu+2&family=Baloo+Thambi+2&family=Bangers&family=Battambang&family=Bayon&family=Besley&family=BioRhyme+Expanded&family=Boogaloo&family=Calistoga&family=Changa+One&family=Chela+One&family=Chivo&family=Comfortaa&family=Comic+Neue&family=Convergence&family=Corben&family=Cutive+Mono&family=Fredoka+One&family=Gravitas+One&family=Handlee&family=Happy+Monkey&family=Klee+One&family=Montserrat&family=Neucha&family=Open+Sans&family=Patrick+Hand&family=Poppins&family=Roboto&family=Shadows+Into+Light+Two&family=Stint+Ultra+Expanded&family=Ubuntu+Mono&family=Unica+One&family=VT323&display=swap');
 
 @font-face {
+    font-family: 'Tragic Marker';
+    src: url("assets/fonts/TragicMarker.otf ");
+}
+
+
+@font-face {
     font-family: 'Montserrat-Reg';
     src: url('assets/fonts/Montserrat-Regular.ttf') format('truetype');
 }
